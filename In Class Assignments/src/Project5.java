@@ -12,9 +12,12 @@ public class Project5 {
         for(int i = 0; i<=3; i++){
             coinAmtBuffer = 0; //resetting the buffer
             coinAmtBuffer = totalCents / coinWorth[i]; //calculating the amount of coins needed
-            System.out.print((coinAmtBuffer>0)?(coinAmtBuffer + " " + coinName[i] +
-                    ((coinAmtBuffer >1 || coinAmtBuffer==0) ? "s" + "\n": "")): "\b");
+            System.out.print((coinAmtBuffer>0) ?
+                    (coinAmtBuffer + " " + coinName[i] +
+                            ((coinAmtBuffer >1 || coinAmtBuffer==0) ? "s" + "\n": ""))
+                    : "\b");
             //logic to see what to print out
+
             totalCents = totalCents % coinWorth[i]; //taking away the coins from the total
         }
     }
