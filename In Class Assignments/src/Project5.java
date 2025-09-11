@@ -1,7 +1,7 @@
 
 public class Project5 {
     public static void main(String[] args) {
-        int totalCents = 821;
+        int totalCents = 99;
         int[] coinWorth = {25, 10, 5, 1};
         String[] coinName = {"Quarter", "Dime", "Nickel", "Penny"};
         int coinAmtBuffer;
