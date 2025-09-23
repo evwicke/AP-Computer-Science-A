@@ -16,6 +16,6 @@ public class Surface {
 
         int surfaceArea = (int) ((Math.pow((double)length, 2.0))*6); // convert length to surface area
 
-        System.out.printf("\nThe surface area of the cube is %d.", surfaceArea); // print out final surface area
+        System.out.printf("The surface area of the cube is %d.", surfaceArea); // print out final surface area
     }
 }
