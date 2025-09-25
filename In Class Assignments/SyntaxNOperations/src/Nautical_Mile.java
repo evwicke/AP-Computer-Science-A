@@ -1,3 +1,5 @@
+package SyntaxNOperations.src;
+
 /*------------------------------------------------------------------------------------------*
 |                                                                                           |
 |          Evan Wicke -- September 22, 2025 -- Nautical Mile -- SyntaxNOperations           |
