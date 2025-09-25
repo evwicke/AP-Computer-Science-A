@@ -1,0 +1,11 @@
+to commit all do
+git commit -a -m "message"
+
+to add new file do
+git add filename
+
+then do
+git push // to save all to GitHub
+
+at beginning do:
+git pull // to sync with GitHub
