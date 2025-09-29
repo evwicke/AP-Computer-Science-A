@@ -24,15 +24,16 @@ public class PayCheck
         System.out.print("\nEnter your hourly wage: "); // prompt user and store hourly pay
         double hourlyPay = Scan.nextDouble();
         
-        double overtimeHours = (hoursWorked > 40) ? hoursWorked - 40 : 0; // find overtime hours
-        double normalHours = (hoursWorked > 40) ? (hoursWorked - overtimeHours) : hoursWorked; // find normal hours
-        double normalPay = (hoursWorked > 40) ? (hoursWorked - overtimeHours)*hourlyPay : hoursWorked*hourlyPay; //find normal pay
+        
+        double overtimeHours = hoursWorked % 40;
+        double normalHours = hoursWorked - (hoursWorked % 40);
+        double normalPay = hourlyPay * (hoursWorked - overtimeHours);
         double overtimePay = overtimeHours * hourlyPay * 1.5; // find overtime pay
         
         double totalPay = overtimePay + normalPay; // sum of overtime pay and normal pay is the total pay.
         
-        System.out.printf("\nEmployee name: %s\nWage: $%.2f\nHours Regular Pay: %.2f\nRegular Pay: %.2f\n" +
-                            "Overtime Hours: %.2f\nOvertime Pay: %.2f\nTotal Weekly Pay: %.2f\n",
+        System.out.printf("\nEmployee name: %s\nWage: $%.2f\nHours Regular Pay: %.2f\nRegular Pay: $%.2f\n" +
+                            "Overtime Hours: %.2f\nOvertime Pay: $%.2f\nTotal Weekly Pay: $%.2f\n",
                             employeeName,hourlyPay,normalHours,normalPay,overtimeHours,overtimePay,totalPay);
                             // print all the info and round doubles to hundreds place.
         
