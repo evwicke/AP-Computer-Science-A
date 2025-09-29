@@ -22,15 +22,17 @@ public class Cooper {
         mainFrame.setResizable(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+        //france
         makeFlag(1,3,mainFrame, new Color[]{Color.blue, Color.white, Color.red});
         mainFrame.setVisible(true);
         Thread.sleep(2000);
 
+        //mauritius
         makeFlag(4,1,mainFrame, new Color[]{Color.red, Color.blue, Color.yellow, Color.green});
         Thread.sleep(2000);
 
-        makeFlag(3,1,mainFrame, new Color[]{new Color(), new Color(), new Color()});
+        //bulgaria via rgb values
+        makeFlag(3,1,mainFrame, new Color[]{new Color(255,255,255), new Color(0,150,110), new Color(214,38,18)});
 
 
     }
