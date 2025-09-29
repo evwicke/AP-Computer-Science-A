@@ -1,4 +1,4 @@
-package SyntaxNOperations.src;
+package src;
 
 /**
  * Write a class in your BlueJ project called SyntaxNOperations that accepts an object’s mass (in kilograms) and velocity (in meters per second) as inputs and prints its momentum

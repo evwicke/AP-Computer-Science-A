@@ -1,4 +1,4 @@
-package SyntaxNOperations.src;
+package src;
 
 /*
     Evan Wicke
@@ -18,7 +18,9 @@ public class Cooper {
     public static void main(String[] args) throws InterruptedException {
         final int WIDTH = 1200;
         final int HEIGHT = 800;
-
+        
+        
+        //initialize the frame
         JFrame mainFrame = new JFrame();
         mainFrame.setTitle("Cooper Flag Program");
         mainFrame.setSize(WIDTH, HEIGHT);
@@ -37,8 +39,7 @@ public class Cooper {
 
         //bulgaria via rgb values
         makeFlag(3,1,mainFrame, new Color[]{new Color(255,255,255), new Color(0,150,110), new Color(214,38,18)});
-
-
+        
     }
 
 
@@ -48,13 +49,13 @@ public class Cooper {
         return panel;
     }
     private static void makeFlag(int rows, int cols, JFrame frame, Color[] color){
-        frame.getContentPane().removeAll();
+        frame.getContentPane().removeAll();  // part 1 of clearing
         GridLayout grid = new GridLayout(rows,cols);
         frame.setLayout(grid);
         for(Color c : color){
             frame.add(newPanel(c));
         }
-        frame.revalidate();
-        frame.repaint();
+        frame.revalidate(); // part 2 of clearing
+        frame.repaint(); // part 3 of clearing
     }
 }
