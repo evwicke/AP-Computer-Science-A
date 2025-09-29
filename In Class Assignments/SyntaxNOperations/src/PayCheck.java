@@ -24,10 +24,10 @@ public class PayCheck
         System.out.print("\nEnter your hourly wage: "); // prompt user and store hourly pay
         double hourlyPay = Scan.nextDouble();
         
-        
-        double overtimeHours = hoursWorked % 40;
-        double normalHours = hoursWorked - (hoursWorked % 40);
-        double normalPay = hourlyPay * (hoursWorked - overtimeHours);
+        int overtimeSwitch = (int)(hoursWorked / 40);
+        double overtimeHours = (hoursWorked - 40) * overtimeSwitch;
+        double normalHours = hoursWorked - overtimeHours;
+        double normalPay = hourlyPay * normalHours;
         double overtimePay = overtimeHours * hourlyPay * 1.5; // find overtime pay
         
         double totalPay = overtimePay + normalPay; // sum of overtime pay and normal pay is the total pay.
