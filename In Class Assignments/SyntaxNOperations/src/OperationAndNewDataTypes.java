@@ -1,4 +1,4 @@
-package SyntaxNOperations.src;
+package src;
 
 /*
 
