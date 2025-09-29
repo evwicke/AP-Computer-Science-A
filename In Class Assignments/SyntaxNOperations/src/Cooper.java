@@ -1,10 +1,14 @@
 package SyntaxNOperations.src;
 
-
 /*
+    Evan Wicke
+    Cooper ( Flag Project ) 
+    Mon Sep 29
 
-
-
+    This program creates a window that displays different country flags
+    using colored panels arranged in a grid layout. It shows the flags
+    of France, Mauritius, and Bulgaria in sequence with delays between
+    each display.
 */
 
 import javax.swing.*; // for jpanels and jframes
