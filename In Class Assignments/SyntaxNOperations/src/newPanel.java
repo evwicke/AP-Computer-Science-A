@@ -18,7 +18,7 @@ public class newPanel
      * It basically initializes the object when it is created in the main method or the driver class.
      */
     public newPanel(Color MyColor){
-        this.setBackground(myColor);
+
         
         
         

@@ -23,7 +23,7 @@ public class PayCheck
         
         System.out.print("\nEnter your hourly wage: "); // prompt user and store hourly pay
         double hourlyPay = Scan.nextDouble();
-        
+
         int overtimeSwitch = (int)(hoursWorked / 40);
         double overtimeHours = (hoursWorked - 40) * overtimeSwitch;
         double normalHours = hoursWorked - overtimeHours;
