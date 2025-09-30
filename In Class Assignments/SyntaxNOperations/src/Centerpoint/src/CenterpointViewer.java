@@ -17,7 +17,8 @@ public class CenterpointViewer {
         frame.setSize(400,500);
         CenterpointPanel myPanel = new CenterpointPanel(new Color(0, 0, 0));
         frame.setLocationRelativeTo(null);
-        
+        frame.setTitle("Centerpoint");
+
         frame.add(myPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
