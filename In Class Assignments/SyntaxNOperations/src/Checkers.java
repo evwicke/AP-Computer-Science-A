@@ -59,7 +59,7 @@ public class Checkers {
 
         for (int i = 0; i < rows; i++) { // iterate through rows
             for (int j = 0; j < cols; j++) { // iterate through columns
-                frame.add(newPanel((i + j) % 2 == 0 ? Color.BLACK : Color.RED)); // add a new panel to the frame with correct colors
+                frame.add(newPanel((i + j) % 2 == 0 ? new Color(0,0,0,0) : Color.RED)); // add a new panel to the frame with correct colors
             }
             if (rows == cols && (i + 1) % 4 == 0 && autoRepaint) { // if the number of rows and columns are equal, and the current row is a multiple of 4
                 frame.revalidate(); // revalidate the frame
