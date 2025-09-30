@@ -1,12 +1,12 @@
 package src;
 
 /*
-    Evan Wicke
-    Checkers ( Make a checkerboard! ) 
-    Mon Sep 29
-    This program creates a checkerboard pattern by taking user input
-    for row and column amounts to display alternating red and black squares.
-*/
+Evan Wicke
+Checkers ( Make a checkerboard! ) 
+Mon Sep 29
+This program creates a checkerboard pattern by taking user input
+for row and column amounts to display alternating red and black squares.
+ */
 
 import javax.swing.*; // for jpanels and jframes
 import java.awt.*; // for colors and containers
@@ -41,14 +41,15 @@ public class Checkers {
         // generate the board and set it to visible
         mainFrame.setVisible(true);
         makeBoard(rows, cols, mainFrame, autoRepaint);
-        mainFrame.revalidate();
+        mainFrame.revalidate(); //after we make the board, we want to refresh the JFrame to make sure any visual bugs are gone.
         mainFrame.repaint();
     }
     // constuctor method for JPanels
     private static JPanel newPanel(Color color) {
         JPanel panel = new JPanel();
         panel.setBackground(color);
-        panel.setOpaque(true);
+        panel.setOpaque(true);  // found this in the docs. it should slow down the program but be worth it because it will 
+                                //make any changes that happen the very top of the stack, essentially helping make it less buggy.
         return panel;
     }
 
@@ -57,14 +58,14 @@ public class Checkers {
         frame.getContentPane().setBackground(Color.BLACK); // set the background color of the frame
         GridLayout grid = new GridLayout(rows, cols, 0, 0); // set the layout of the frame
         frame.setLayout(grid);
-
-
+        int panelCounter = 0;
         for (int i = 0; i < rows; i++) { // iterate through rows
             for (int j = 0; j < cols; j++) { // iterate through columns
                 frame.add(newPanel((i + j) % 2 == 0 ? new Color(0,0,0,0) : Color.RED)); // add a new panel to the frame with correct colors
+                panelCounter++;
+                System.out.print((panelCounter%50==0)? (panelCounter%200==0)? panelCounter + "\n" : panelCounter + "\t" : "");
             }
-            if (rows == cols && (i + 1) % 4 == 0 && autoRepaint) { frame.revalidate(); frame.repaint(); }
+            if (rows == cols && (i + 1) % 4 == 0 && autoRepaint) { frame.revalidate(); frame.repaint(); } // if we are autorepainting, every 4th perfect square will be displayed.
         }
-
     }
 }

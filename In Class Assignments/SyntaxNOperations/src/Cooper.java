@@ -29,9 +29,9 @@ public class Cooper {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //france
-        makeFlag(1,3,mainFrame, new Color[]{Color.blue, Color.white, Color.red});
-        mainFrame.setVisible(true);
-        Thread.sleep(2000);
+        makeFlag(1,3,mainFrame, new Color[]{Color.blue, Color.white, Color.red});  // uses format:    makeFlag(rows,cols,frame,color[]);
+        mainFrame.setVisible(true); // make the frame visible and display it.
+        Thread.sleep(2000); // wait 2 seconds
 
         //mauritius
         makeFlag(4,1,mainFrame, new Color[]{Color.red, Color.blue, Color.yellow, Color.green});
@@ -43,19 +43,19 @@ public class Cooper {
     }
 
 
-    private static JPanel newPanel(Color color) {
+    private static JPanel newPanel(Color color) {  //method to make a new frame passed with a certain color
         JPanel panel = new JPanel();
         panel.setBackground(color);
         return panel;
     }
-    private static void makeFlag(int rows, int cols, JFrame frame, Color[] color){
+    private static void makeFlag(int rows, int cols, JFrame frame, Color[] color){  //method to use the args to make a flag
         frame.getContentPane().removeAll();  // part 1 of clearing
         GridLayout grid = new GridLayout(rows,cols);
         frame.setLayout(grid);
-        for(Color c : color){
+        for(Color c : color){  // for each color SLOT in the list of colors, add a frame with the color it contains.
             frame.add(newPanel(c));
         }
-        frame.revalidate(); // part 2 of clearing
-        frame.repaint(); // part 3 of clearing
+        frame.revalidate(); // signals to the cpu to go back and check if you are running out of grid slots, if so, it makes more.
+        frame.repaint(); // now take the backlog of 'add();' commands and fit them into their respective grid slots.
     }
 }

@@ -1,5 +1,0 @@
-#BlueJ class context
-comment0.params=MyColor
-comment0.target=newPanel(java.awt.Color)
-comment0.text=\r\n\ Making\ a\ constructor,\ Used\ in\ OOP.\ Need\ this\ when\ you\ create\ your\ own\ class.\r\n\ It\ basically\ initializes\ the\ object\ when\ it\ is\ created\ in\ the\ main\ method\ or\ the\ driver\ class.\r\n
-numComments=1
