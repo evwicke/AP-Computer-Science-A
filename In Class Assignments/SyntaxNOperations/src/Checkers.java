@@ -23,15 +23,16 @@ public class Checkers {
         mainFrame.setResizable(true);
         mainFrame.setBackground(Color.BLACK);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        System.out.println("Multiples of 10 work better for autopaint, but anything works.");
         System.out.println("Enter the number of rows: ");
         final int rows = scan.nextInt();
         System.out.println("Enter the number of columns: ");
         final int cols = scan.nextInt();
-
+        System.out.println("Should the board auto-repaint? (true/false)");
+        final boolean autoRepaint = scan.nextBoolean();
 
         mainFrame.setVisible(true);
-        makeBoard(rows, cols, mainFrame);
+        makeBoard(rows, cols, mainFrame, autoRepaint);
         mainFrame.revalidate();
         mainFrame.repaint();
     }
@@ -43,17 +44,21 @@ public class Checkers {
         return panel;
     }
 
-    private static void makeBoard(int rows, int cols, JFrame frame) {
+    private static void makeBoard(int rows, int cols, JFrame frame, boolean autoRepaint) {
         frame.getContentPane().setBackground(Color.BLACK);
         GridLayout grid = new GridLayout(rows, cols, 0, 0);
         frame.setLayout(grid);
 
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 frame.add(newPanel((i + j) % 2 == 0 ? Color.BLACK : Color.RED));
+            }
+            if (rows == cols && (i + 1) % 4 == 0 && autoRepaint) {
                 frame.revalidate();
                 frame.repaint();
             }
         }
+
     }
 }
