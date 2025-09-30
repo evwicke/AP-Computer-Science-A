@@ -1,4 +1,3 @@
-package SyntaxNOperations.src;
 
 /*
  * 
@@ -17,7 +16,7 @@ import javax.swing.*; // for jpanels and jframes
 import java.awt.*; // for colors and containers
 
 public class GUI_Window{
-    public static void main() throws InterruptedException { 
+    public static void main(String[] args) throws InterruptedException {
         final int WIDTH = 300;
         final int HEIGHT = 500;
 
