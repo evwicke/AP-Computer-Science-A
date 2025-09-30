@@ -1,6 +1,6 @@
-package src;
+package MyPanelExampleProject.src;
 
-/**
+/*
  * Write a description of class LynchPaznel here.
  *
  * @dlynch1
@@ -8,7 +8,7 @@ package src;
  */
 import javax.swing.*; //JFrame and JPanel
 import java.awt.*; //color and containers
-public class myPanel extends JPanel //isA relationship
+public class MyPanel extends JPanel //isA relationship
 //"extends" gets all public methods from a JPanel
 {
     /**
@@ -16,7 +16,7 @@ public class myPanel extends JPanel //isA relationship
      * ...we'll talk more later but for now, it basically initializes the
      * object when it gets constructed from a main method elsewhere
      */
-    public myPanel(Color myColor)
+    public MyPanel(Color myColor)
     {
         this.setBackground(myColor); //"this" means is a relationship
     }
