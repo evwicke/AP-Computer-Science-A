@@ -1,3 +1,5 @@
+package src;
+
 /*
     Evan Wicke
     Checkers ( Make a checkerboard! ) 
