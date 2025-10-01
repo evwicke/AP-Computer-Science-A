@@ -1,10 +1,10 @@
 package GUI.src.MullerLyer;
 
 /*
- * Write a description of class CanvasGUI here.
+ * Displays the Muller-Lyer panel to the screen with certain attributes like background color, size, and initial location.
  *
- * @dlynch1
- * @version 9.23.24
+ * @evwicke
+ * @version 10.1.25
  */
 import javax.swing.*;
 import java.awt.*;
