@@ -17,6 +17,7 @@ public class MullerLyerViewer {
         frame.setSize(1000,750);
         MullerLyer mullerLyer = new MullerLyer(new Color(255,255,255));
         frame.setLocationRelativeTo(null);
+        frame.setTitle("Muller-Lyer");
         
         frame.add(mullerLyer);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
