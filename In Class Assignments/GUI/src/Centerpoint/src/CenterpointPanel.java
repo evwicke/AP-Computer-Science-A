@@ -1,4 +1,4 @@
-package Centerpoint.src;
+package src.Centerpoint.src;
 
 /*
  * Centerpoint project

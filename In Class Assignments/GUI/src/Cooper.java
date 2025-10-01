@@ -19,7 +19,6 @@ public class Cooper {
         final int WIDTH = 1200;
         final int HEIGHT = 800;
         
-        
         //initialize the frame
         JFrame mainFrame = new JFrame();
         mainFrame.setTitle("Cooper Flag Program");
@@ -41,21 +40,19 @@ public class Cooper {
         makeFlag(3,1,mainFrame, new Color[]{new Color(255,255,255), new Color(0,150,110), new Color(214,38,18)});
         
     }
-
-
     private static JPanel newPanel(Color color) {  //method to make a new frame passed with a certain color
         JPanel panel = new JPanel();
         panel.setBackground(color);
         return panel;
     }
     private static void makeFlag(int rows, int cols, JFrame frame, Color[] color){  //method to use the args to make a flag
-        frame.getContentPane().removeAll();  // part 1 of clearing
+        frame.getContentPane().removeAll(); //removes old things from pane
         GridLayout grid = new GridLayout(rows,cols);
         frame.setLayout(grid);
         for(Color c : color){  // for each color SLOT in the list of colors, add a frame with the color it contains.
             frame.add(newPanel(c));
         }
-        frame.revalidate(); // signals to the cpu to go back and check if you are running out of grid slots, if so, it makes more.
-        frame.repaint(); // now take the backlog of 'add();' commands and fit them into their respective grid slots.
+        frame.revalidate();
+        frame.repaint(); 
     }
 }

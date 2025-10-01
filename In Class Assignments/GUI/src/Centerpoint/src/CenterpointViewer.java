@@ -1,23 +1,24 @@
-package MyPanelExampleProject.src;
+package src.Centerpoint.src;
 
 /*
- * Write a description of class CanvasGUI here.
- *
- * @dlynch1
- * @version 9.23.24
+ * Centerpoint project
+ * @Evan Wicke
+ * @Tuesday Sep 30
  */
+
 import javax.swing.*;
 import java.awt.*;
 
 
-public class MyPanelViewer{
+public class CenterpointViewer {
     public static void main(String[] args)
     {
         JFrame frame = new JFrame();
         frame.setSize(400,500);
-        MyPanel myPanel = new MyPanel(new Color(14, 118, 14));
+        CenterpointPanel myPanel = new CenterpointPanel(new Color(0, 0, 0));
         frame.setLocationRelativeTo(null);
-        
+        frame.setTitle("Centerpoint");
+
         frame.add(myPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

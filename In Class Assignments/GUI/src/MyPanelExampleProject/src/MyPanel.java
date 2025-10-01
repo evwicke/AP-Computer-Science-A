@@ -1,4 +1,4 @@
-package MyPanelExampleProject.src;
+package src;
 
 /*
  * Write a description of class LynchPaznel here.
