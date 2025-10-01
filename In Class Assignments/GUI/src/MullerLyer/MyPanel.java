@@ -1,4 +1,4 @@
-package src.MullerLyer;
+package GUI.src.MullerLyer;
 
 /*
  * Write a description of class LynchPaznel here.
@@ -25,9 +25,11 @@ public class MyPanel extends JPanel //isA relationship
         gT.setStroke(new BasicStroke(7.0f)); //"f" is for float
         gT.setPaint(Color.BLACK);
         
-        gT.drawLine((int)(x*.05), getHeight()/2, (int)(x*.30), getHeight()/2);
-        
-        
+        gT.drawLine((int)(x*.10), (int)(y*0.33), (int)(x*.40), (int)(y*0.33));
+        gT.drawLine((int)(0),(int)(y*0.23), (int)(x*.10),(int)(y*0.33));
+        gT.drawLine((int)(0),(int)(y*0.43), (int)(x*.10),(int)(y*0.33));
+
+        gT.drawLine((int)(x*.60), getHeight()/2, (int)(x*.90), getHeight()/2);
        
     }
 }

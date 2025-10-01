@@ -1,4 +1,4 @@
-package src.MullerLyer;
+package GUI.src.MullerLyer;
 
 /*
  * Write a description of class CanvasGUI here.
@@ -14,7 +14,7 @@ public class MyPanelViewer{
     public static void main(String[] args)
     {
         JFrame frame = new JFrame();
-        frame.setSize(400,500);
+        frame.setSize(1000,750);
         MyPanel myPanel = new MyPanel(new Color(255,255,255));
         frame.setLocationRelativeTo(null);
         
