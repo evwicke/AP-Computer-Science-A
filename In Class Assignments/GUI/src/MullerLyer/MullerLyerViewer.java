@@ -10,15 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class MyPanelViewer{
+public class MullerLyerViewer {
     public static void main(String[] args)
     {
         JFrame frame = new JFrame();
         frame.setSize(1000,750);
-        MyPanel myPanel = new MyPanel(new Color(255,255,255));
+        MullerLyer mullerLyer = new MullerLyer(new Color(255,255,255));
         frame.setLocationRelativeTo(null);
         
-        frame.add(myPanel);
+        frame.add(mullerLyer);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
