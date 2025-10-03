@@ -1,4 +1,6 @@
-package src.MyPanelExampleProject.src;
+package src.MyCoolGraphicPic.src;
+
+//package src.MyCoolGraphicPic.src;
 
 /*
  * Write a description of class CanvasGUI here.
@@ -15,7 +17,7 @@ public class MyPanelViewer{
     {
         JFrame frame = new JFrame();
         frame.setSize(400,500);
-        src.MyPanel myPanel = new src.MyPanel(new Color(14, 118, 14));
+        MyPanel myPanel = new MyPanel(new Color(14, 118, 14));
         frame.setLocationRelativeTo(null);
         
         frame.add(myPanel);

@@ -1,4 +1,4 @@
-package GUI.src;
+package src;
 
 /*
 Evan Wicke
