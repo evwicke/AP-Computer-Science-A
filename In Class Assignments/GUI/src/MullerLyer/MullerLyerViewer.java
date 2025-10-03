@@ -1,4 +1,4 @@
-package GUI.src.MullerLyer;
+package src.MullerLyer;
 
 /*
  * Displays the Muller-Lyer panel to the screen with certain attributes like background color, size, and initial location.

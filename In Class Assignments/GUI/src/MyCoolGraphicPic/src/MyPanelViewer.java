@@ -1,4 +1,4 @@
-package GUI.src.MyCoolGraphicPic.src;
+package src.MyCoolGraphicPic.src;
 
 //package src.MyCoolGraphicPic.src;
 
@@ -16,8 +16,8 @@ public class MyPanelViewer{
     public static void main(String[] args)
     {
         JFrame frame = new JFrame();
-        frame.setSize(400,500);
-        MyPanel myPanel = new MyPanel(new Color(123, 205, 255));
+        frame.setSize(1600,900);
+        MyPanel myPanel = new MyPanel(new Color(244 ,143 ,149));
         frame.setLocationRelativeTo(null);
         
         frame.add(myPanel);
