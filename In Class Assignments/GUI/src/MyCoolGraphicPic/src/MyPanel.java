@@ -13,32 +13,34 @@ import java.util.*; //for arraylists (just better arrays)
 
 public class MyPanel extends JPanel{
 
-    public void paintComponent(Graphics g){
+    int uH = getHeight(); // set some global variables here.
+    int uW = getWidth();
+
+    public void paintComponent(Graphics g){  //basically the main method of this class. it's where all the helper methods get called.
     super.paintComponent(g);
     
     Graphics2D g2 = (Graphics2D) g;
-    // antialiasing. yes.
+    // antialiasing. yes. smoother edges are always good
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-    int uH = getHeight();
-    int uW = getWidth();
-        drawGradientSky(g2);
-        g2.setStroke(new BasicStroke(14.0f));
-        
+        uH = getHeight(); // have to reset every frame, so I put it in here too.
+        uW = getWidth();
 
-        int sunSize = (int)(0.25 * Math.min(uW, uH));
-        int sunX = uW/2 - sunSize/2;
-        int sunY = (int)(uH/3.5) - sunSize/2; // Higher position
+        drawGradientSky(g2); // furthest back in the painting is the sky. draw that using the helper method ( I moved it all to a diff method because the stars are messy. )
 
-        g2.setColor(new Color(255, 250, 220)); // Soft yellow-white
-        g2.fillOval(sunX, sunY, sunSize, sunSize);
+        int sunSize = (int)(0.25 * Math.min(uW, uH)); // make the radius of the sun 25% of the width or height of the screen, whichever is smaller. this makes sure its always a circle.
+        int sunX = uW/2 - sunSize/2; // put it in the middle
+        int sunY = (uH/3) - sunSize/2; // Higher position than the middle. 1/3 down the screen is good
 
-        //ground
+        g2.setColor(new Color(255, 250, 220)); // yellow-white
+        g2.fillOval(sunX, sunY, sunSize, sunSize); // make the sun
+
+        //ground at the very bottom of the screen. dont want it drawing over the mountains or trees.
         g2.setColor(new Color(6, 0, 20));
         g2.fillRect((0),(uH/2),(uW),(uH/2));
 
 
-        Graphics2D gThin = (Graphics2D) g;
+        Graphics2D gThin = (Graphics2D) g; // this is for the very thin outline of all the shapes to help them blend in more and be less jagged
         gThin.setStroke(new BasicStroke(2.5f));
 
         // top mountains
@@ -47,8 +49,18 @@ public class MyPanel extends JPanel{
         double[] topMountainsY = {23.96 ,19.8 ,27.3, 24.85, 22.7, 24.3, 19.5, 12.7, 9.7 ,6.4, 9.4 ,13.9, 19.9, 22.7,
             20.1, 22.45, 18.36, 21 };
         Polygon topMountains = new Polygon(desmosToPixX(topMountainsX),desmosToPixY(topMountainsY),topMountainsX.length);
+
+
+        /*
+        Ok so this polygon is the top mountain. (the one in the back of the frame). I initialize the polygon with
+        new Polygon(int[x], int[y], int npoints). then i set the color and draw the filled in shape with fillPolygon. then i make the outline with drawPolygon
+        this applies to all of the mountains.
+         */
         g2.setColor(new Color(98,78,141));
         g2.fillPolygon(topMountains);
+        gThin.setStroke(new BasicStroke(0.5f));
+        gThin.setColor(new Color(0, 0, 0, 50)); // Semi-transparent
+        gThin.drawPolygon(topMountains);
 
 
         //bottom mountains
@@ -61,36 +73,55 @@ public class MyPanel extends JPanel{
         gThin.setColor(new Color(0, 0, 0, 50)); // Semi-transparent
         gThin.drawPolygon(bottomMountains);
 
-        Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 220, 200, 0)}; // Make outer color transparent
-        float[] fractions = {0.0f, 1.0f}; // Color distribution
-        RadialGradientPaint sunBeam = new RadialGradientPaint(
-                (float)(sunX + sunSize/2),  // Center X
-                (float)(sunY + sunSize/2),  // Center Y
-                (float)(0.50 * Math.min(uW, uH)),  // Radius as float
-                fractions,
-                sunBeamColors
-        );
-        g2.setPaint(sunBeam);
 
-        int beamSize = (int)(1.0 * Math.min(uW, uH));
-        g2.fillOval(sunX + sunSize/2 - beamSize/2, sunY + sunSize/2 - beamSize/2, beamSize, beamSize);
 
-        g2.setColor(new Color(6, 0, 20));
         // Left forest cluster - positioned on the curve y = (1/160)(x-30)^2 + 4
+        g2.setColor(new Color(6, 0, 20));
         drawTreeOnCurve(g2, 5, 2.5);
         drawTreeOnCurve(g2, 8, 2.0);
         drawTreeOnCurve(g2, 12, 3.0);
         drawTreeOnCurve(g2, 15, 1.8);
         drawTreeOnCurve(g2, 18, 2.2);
         drawTreeOnCurve(g2, 10, 1.5);
-        
+
         // Right forest cluster - also on the curve.
+        g2.setColor(new Color(6, 0, 20));
         drawTreeOnCurve(g2, 42, 2.6);
         drawTreeOnCurve(g2, 45, 2.1);
         drawTreeOnCurve(g2, 48, 3.2);
         drawTreeOnCurve(g2, 52, 1.9);
         drawTreeOnCurve(g2, 55, 2.3);
         drawTreeOnCurve(g2, 50, 2.0);
+
+
+
+
+
+        /*
+        This is the sunlight effect that i made. Basically is a custom color object (technically a paint object, but they function the same).
+        the color array is the 2 colors it will go between, the first is in the center, and the second is in the outer parts of the effect.
+        (the effect is a circle because its radial gradient not a normal gradient). the float array is there to tell it WHERE in the circle each color
+        should be at 100% opacity. ( at the middle its color 1, and at the outer its color 2. )
+        then i set the paint to the new paint color.
+
+         */
+        Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 50, 0, 8), new Color(0, 0, 0, 105), new Color(0, 0, 0, 255)}; // Make outer color transparent
+        float[] fractions = {0.0f, 0.45f, 0.75f, 1.0f}; // Color distribution
+        RadialGradientPaint sunBeam = new RadialGradientPaint(
+                (float)(sunX + sunSize/2),  // Center X
+                (float)(sunY + sunSize/2),  // Center Y
+                (float)(0.7 * Math.max(uW, uH)),  // Radius as float
+                fractions,
+                sunBeamColors
+        );
+        g2.setPaint(sunBeam);
+
+        int beamSize = (int)(1.5 * Math.max(uW, uH)); //radius of the sun's beams effect
+        g2.fillOval(sunX + sunSize/2 - beamSize/2, sunY + sunSize/2 - beamSize/2, beamSize, beamSize);
+
+
+
+
 
     }
 
