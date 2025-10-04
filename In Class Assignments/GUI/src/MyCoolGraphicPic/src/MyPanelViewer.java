@@ -13,11 +13,10 @@ import java.awt.*;
 
 
 public class MyPanelViewer{
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setSize(1600,900);
-        MyPanel myPanel = new MyPanel(new Color(244 ,143 ,149));
+        MyPanel myPanel = new MyPanel();
         frame.setLocationRelativeTo(null);
         
         frame.add(myPanel);

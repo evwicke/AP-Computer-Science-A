@@ -13,11 +13,6 @@ import java.util.*; //for arraylists (just better arrays)
 
 public class MyPanel extends JPanel{
 
-    public MyPanel(Color myColor)
-    {
-        //this.setBackground(myColor); // doing my own background, so this is unneeded.
-    }
-    
     public void paintComponent(Graphics g){
     super.paintComponent(g);
     
@@ -39,7 +34,7 @@ public class MyPanel extends JPanel{
         g2.fillOval(sunX, sunY, sunSize, sunSize);
 
         //ground
-        g2.setColor(Color.black);
+        g2.setColor(new Color(6, 0, 20));
         g2.fillRect((0),(uH/2),(uW),(uH/2));
 
 
@@ -56,7 +51,6 @@ public class MyPanel extends JPanel{
         g2.fillPolygon(topMountains);
 
 
-
         //bottom mountains
         double[] bottomMountainsX = {54.2,49.8,44.1,32.7,25.3,21,12.5,9.4,5.54,0,0,8.6,26.6,38.7,50.2,60,60,60};
         double[] bottomMountainsY = {21.9,25.4,18.94,13.66,8.8,9.94,17,19.66,24.4,22.75,12.5,8.5,3.96,4.2,6.8,9.8,19.2,25.5};
@@ -67,9 +61,22 @@ public class MyPanel extends JPanel{
         gThin.setColor(new Color(0, 0, 0, 50)); // Semi-transparent
         gThin.drawPolygon(bottomMountains);
 
+        Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 220, 200, 0)}; // Make outer color transparent
+        float[] fractions = {0.0f, 1.0f}; // Color distribution
+        RadialGradientPaint sunBeam = new RadialGradientPaint(
+                (float)(sunX + sunSize/2),  // Center X
+                (float)(sunY + sunSize/2),  // Center Y
+                (float)(0.50 * Math.min(uW, uH)),  // Radius as float
+                fractions,
+                sunBeamColors
+        );
+        g2.setPaint(sunBeam);
 
-        g2.setColor(Color.black);
-        // Left forest cluster - positioned on curve y = (1/160)(x-30)^2 + 4
+        int beamSize = (int)(1.0 * Math.min(uW, uH));
+        g2.fillOval(sunX + sunSize/2 - beamSize/2, sunY + sunSize/2 - beamSize/2, beamSize, beamSize);
+
+        g2.setColor(new Color(6, 0, 20));
+        // Left forest cluster - positioned on the curve y = (1/160)(x-30)^2 + 4
         drawTreeOnCurve(g2, 5, 2.5);
         drawTreeOnCurve(g2, 8, 2.0);
         drawTreeOnCurve(g2, 12, 3.0);
@@ -91,7 +98,7 @@ public class MyPanel extends JPanel{
         ArrayList<Integer> pixList = new ArrayList<>();
         
         for(double f : array){
-            double percentage = (double)(f / desmosX);
+            double percentage = (f / desmosX);
             int pixel = (int)(percentage * getWidth());
             pixList.add(pixel);
         }
@@ -102,7 +109,7 @@ public class MyPanel extends JPanel{
         ArrayList<Integer> pixList = new ArrayList<>();
         
         for(double f : array){
-            double percentage = (double)(Math.abs(34-f) / desmosY);
+            double percentage = (Math.abs(34-f) / desmosY);
             int pixel = (int)(percentage * getHeight());
             pixList.add(pixel);
         }
