@@ -93,6 +93,7 @@ public class MyPanel extends JPanel{
         drawTreeOnCurve(g2, 50, 2.0);
 
     }
+
     public int[] desmosToPixX(double[] array){
         double desmosX = 60;
         ArrayList<Integer> pixList = new ArrayList<>();
@@ -104,6 +105,7 @@ public class MyPanel extends JPanel{
         }
         return pixList.stream().mapToInt(i->i).toArray();
     }
+
     public int[] desmosToPixY(double[] array){
         double desmosY = 34;
         ArrayList<Integer> pixList = new ArrayList<>();
@@ -127,24 +129,24 @@ public class MyPanel extends JPanel{
         g2.fillRect(0, 0, uW, uH/2);
 
     
-    // Add subtle stars
-    Random rand = new Random(67);
-    g2.setColor(new Color(255, 255, 255, 150)); // Semi-transparent white
-    
-    for (int i = 0; i < 60; i++) {
-        int starX = rand.nextInt(uW);
-        int starY = rand.nextInt(uH / 3); // Only in top third of sky
-        int starSize = rand.nextInt(2) + 3; // 1-2 pixels
-        
-        // Make some stars slightly brighter
-        if (rand.nextInt(5) == 0) {
-            g2.setColor(new Color(255, 255, 255, 200));
-        } else {
-            g2.setColor(new Color(255, 255, 255, 120));
+        //stars
+        Random rand = new Random(67);
+        g2.setColor(new Color(255, 255, 255, 150)); // Semi-transparent white
+
+        for (int i = 0; i < 100; i++) {
+            int starX = rand.nextInt(uW);
+            int starY = rand.nextInt(uH / 3); // Only in top third of sky
+            int starSize = rand.nextInt(4) +1; // 1-2 pixels
+
+            // Make some stars slightly brighter
+            if (rand.nextInt(5) == 0) {
+                g2.setColor(new Color(255, 255, 255, 200));
+            } else {
+                g2.setColor(new Color(255, 255, 255, 120));
+            }
+
+            g2.fillOval(starX, starY, starSize, starSize);
         }
-        
-        g2.fillOval(starX, starY, starSize, starSize);
-    }
     }
     
     // Helper to place a tree on the parabolic curve: y = (1/160)(x-30)^2 + 4
