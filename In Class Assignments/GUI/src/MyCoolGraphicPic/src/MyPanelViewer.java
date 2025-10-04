@@ -1,4 +1,4 @@
-package src.MyCoolGraphicPic.src;
+package GUI.src.MyCoolGraphicPic.src;
 
 //package src.MyCoolGraphicPic.src;
 
