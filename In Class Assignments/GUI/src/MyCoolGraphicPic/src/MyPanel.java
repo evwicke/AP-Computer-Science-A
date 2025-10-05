@@ -8,7 +8,6 @@ package GUI.src.MyCoolGraphicPic.src;
  */
 import javax.swing.*; //JFrame and JPanel
 import java.awt.*; //color and containers
-import java.awt.geom.*;
 import java.util.*; //for arraylists (just better arrays)
 
 
