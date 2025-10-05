@@ -8,6 +8,7 @@ package GUI.src.MyCoolGraphicPic.src;
  */
 import javax.swing.*; //JFrame and JPanel
 import java.awt.*; //color and containers
+import java.awt.geom.*;
 import java.util.*; //for arraylists (just better arrays)
 
 
@@ -39,7 +40,6 @@ public class MyPanel extends JPanel{
         g2.setColor(new Color(6, 0, 20));
         g2.fillRect((0),(uH/2),(uW),(uH/2));
 
-
         Graphics2D gThin = (Graphics2D) g; // this is for the very thin outline of all the shapes to help them blend in more and be less jagged
         gThin.setStroke(new BasicStroke(2.5f));
 
@@ -49,7 +49,6 @@ public class MyPanel extends JPanel{
         double[] topMountainsY = {23.96 ,19.8 ,27.3, 24.85, 22.7, 24.3, 19.5, 12.7, 9.7 ,6.4, 9.4 ,13.9, 19.9, 22.7,
             20.1, 22.45, 18.36, 21 };
         Polygon topMountains = new Polygon(desmosToPixX(topMountainsX),desmosToPixY(topMountainsY),topMountainsX.length);
-
 
         /*
         Ok so this polygon is the top mountain. (the one in the back of the frame). I initialize the polygon with
@@ -62,7 +61,6 @@ public class MyPanel extends JPanel{
         gThin.setColor(new Color(0, 0, 0, 50)); // Semi-transparent
         gThin.drawPolygon(topMountains);
 
-
         //bottom mountains
         double[] bottomMountainsX = {54.2,49.8,44.1,32.7,25.3,21,12.5,9.4,5.54,0,0,8.6,26.6,38.7,50.2,60,60,60};
         double[] bottomMountainsY = {21.9,25.4,18.94,13.66,8.8,9.94,17,19.66,24.4,22.75,12.5,8.5,3.96,4.2,6.8,9.8,19.2,25.5};
@@ -74,28 +72,32 @@ public class MyPanel extends JPanel{
         gThin.drawPolygon(bottomMountains);
 
 
-
         // Left forest cluster - positioned on the curve y = (1/160)(x-30)^2 + 4
         g2.setColor(new Color(6, 0, 20));
+        drawTreeOnCurve(g2, 3, 1.2);
         drawTreeOnCurve(g2, 5, 2.5);
         drawTreeOnCurve(g2, 8, 2.0);
+        drawTreeOnCurve(g2, 10, 1.5);
         drawTreeOnCurve(g2, 12, 3.0);
         drawTreeOnCurve(g2, 15, 1.8);
+        drawTreeOnCurve(g2, 16.5, 1.2);
         drawTreeOnCurve(g2, 18, 2.2);
-        drawTreeOnCurve(g2, 10, 1.5);
+
 
         // Right forest cluster - also on the curve.
         g2.setColor(new Color(6, 0, 20));
+        drawTreeOnCurve(g2, 39, 1.5);
         drawTreeOnCurve(g2, 42, 2.6);
         drawTreeOnCurve(g2, 45, 2.1);
         drawTreeOnCurve(g2, 48, 3.2);
         drawTreeOnCurve(g2, 52, 1.9);
         drawTreeOnCurve(g2, 55, 2.3);
         drawTreeOnCurve(g2, 50, 2.0);
+        drawTreeOnCurve(g2, 58, 1.0);
 
-
-
-
+        drawCloud(g2, 100, 100, 1.0);
+        drawCloud(g2, 300, 200, 1.2);
+        drawCloud(g2, uW-200, 150, 1.3);
 
         /*
         This is the sunlight effect that i made. Basically is a custom color object (technically a paint object, but they function the same).
@@ -103,9 +105,8 @@ public class MyPanel extends JPanel{
         (the effect is a circle because its radial gradient not a normal gradient). the float array is there to tell it WHERE in the circle each color
         should be at 100% opacity. ( at the middle its color 1, and at the outer its color 2. )
         then i set the paint to the new paint color.
-
          */
-        Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 50, 0, 8), new Color(0, 0, 0, 105), new Color(0, 0, 0, 255)}; // Make outer color transparent
+        Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 50, 45, 16), new Color(0, 0, 0, 105), new Color(0, 0, 0, 255)}; // Make outer color transparent
         float[] fractions = {0.0f, 0.45f, 0.75f, 1.0f}; // Color distribution
         RadialGradientPaint sunBeam = new RadialGradientPaint(
                 (float)(sunX + sunSize/2),  // Center X
@@ -118,10 +119,6 @@ public class MyPanel extends JPanel{
 
         int beamSize = (int)(1.5 * Math.max(uW, uH)); //radius of the sun's beams effect
         g2.fillOval(sunX + sunSize/2 - beamSize/2, sunY + sunSize/2 - beamSize/2, beamSize, beamSize);
-
-
-
-
 
     }
 
@@ -194,7 +191,7 @@ public class MyPanel extends JPanel{
     }
     
     private void drawPineTree(Graphics2D g2, int x, int baseY, double scale) {
-        int baseHeight = 100; // Base tree height
+        int baseHeight = (int)(uH/10.8); // Base tree height
         int height = (int)(baseHeight * scale);
         int width = height / 2; // Width proportional to height
         
@@ -226,5 +223,17 @@ public class MyPanel extends JPanel{
             
             g2.fillPolygon(xPoints, yPoints, 3);
         }
+    }
+
+    private void drawCloud(Graphics2D g2, int x, int y, double scale) {
+        int cloudWidth = (int) (Math.min(uW,uH) / 12 * 1.5 * scale); // Base width of the cloud
+        int cloudHeight = (int) (Math.min(uW,uH) / 20 * scale); // Base height of the cloud
+
+        // Draw cloud ovals
+        g2.setColor(new Color(255, 255, 255, 240)); // Light, semi-transparent white
+        g2.fillOval(x, y, cloudWidth, cloudHeight);
+        g2.fillOval(x - cloudWidth / 2, y + cloudHeight / 4, (int) (cloudWidth * 0.7), (int) (cloudHeight * 0.7));
+        g2.fillOval(x + cloudWidth / 3, y + cloudHeight / 3, (int) (cloudWidth * 0.8), (int) (cloudHeight * 0.8));
+        g2.fillOval(x - cloudWidth / 3, y - cloudHeight / 3, (int) (cloudWidth * 0.9), (int) (cloudHeight * 0.9));
     }
 }
