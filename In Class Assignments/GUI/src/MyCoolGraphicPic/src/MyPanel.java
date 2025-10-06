@@ -48,7 +48,6 @@ public class MyPanel extends JPanel{
         double[] topMountainsY = {23.96 ,19.8 ,27.3, 24.85, 22.7, 24.3, 19.5, 12.7, 9.7 ,6.4, 9.4 ,13.9, 19.9, 22.7,
             20.1, 22.45, 18.36, 21 };
         Polygon topMountains = new Polygon(desmosToPixX(topMountainsX),desmosToPixY(topMountainsY),topMountainsX.length);
-
         /*
         Ok so this polygon is the top mountain. (the one in the back of the frame). I initialize the polygon with
         new Polygon(int[x], int[y], int npoints). then i set the color and draw the filled in shape with fillPolygon. then i make the outline with drawPolygon
@@ -99,10 +98,10 @@ public class MyPanel extends JPanel{
         drawCloud(g2, uW-200, 150, 1.3);
 
         /*
-        This is the sunlight effect that i made. Basically is a custom color object (technically a paint object, but they function the same).
-        the color array is the 2 colors it will go between, the first is in the center, and the second is in the outer parts of the effect.
+        Basically is a custom color object (technically a paint object, but they function the same).
+        the color array is the colors it will go between, the first is in the center, and the last is in the outer parts of the effect.
         (the effect is a circle because its radial gradient not a normal gradient). the float array is there to tell it WHERE in the circle each color
-        should be at 100% opacity. ( at the middle its color 1, and at the outer its color 2. )
+        should be at 100% opacity. ( at the middle its color 1, and at the outer its color n.length. )
         then i set the paint to the new paint color.
          */
         Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 50, 45, 16), new Color(0, 0, 0, 105), new Color(0, 0, 0, 255)}; // Make outer color transparent
@@ -158,18 +157,16 @@ public class MyPanel extends JPanel{
     
         //stars
         Random rand = new Random(67);
-        g2.setColor(new Color(255, 255, 255, 150)); // Semi-transparent white
+        g2.setColor(new Color(255, 255, 255, 110)); // Semi-transparent white
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 150; i++) {
             int starX = rand.nextInt(uW);
             int starY = rand.nextInt(uH / 3); // Only in top third of sky
             int starSize = rand.nextInt(4) +1; // 1-2 pixels
 
             // Make some stars slightly brighter
-            if (rand.nextInt(5) == 0) {
-                g2.setColor(new Color(255, 255, 255, 200));
-            } else {
-                g2.setColor(new Color(255, 255, 255, 120));
+            if (rand.nextInt(10) == 0) {
+                g2.setColor(new Color(255, 255, 255, 230));
             }
 
             g2.fillOval(starX, starY, starSize, starSize);
@@ -198,8 +195,7 @@ public class MyPanel extends JPanel{
         int trunkWidth = width / 6;
         int trunkHeight = height / 6;
         g2.fillRect(x - trunkWidth/2, baseY - trunkHeight, trunkWidth, trunkHeight);
-        
-        // Draw 4 layers of triangular branches with overlap
+
         int numLayers = 5;
         int layerHeight = (height - trunkHeight) / 3;
         
@@ -229,7 +225,7 @@ public class MyPanel extends JPanel{
         int cloudHeight = (int) (Math.min(uW,uH) / 20 * scale); // Base height of the cloud
 
         // Draw cloud ovals
-        g2.setColor(new Color(255, 255, 255, 240)); // Light, semi-transparent white
+        g2.setColor(new Color(255, 255, 255, 240)); // semi-transparent white
         g2.fillOval(x, y, cloudWidth, cloudHeight);
         g2.fillOval(x - cloudWidth / 2, y + cloudHeight / 4, (int) (cloudWidth * 0.7), (int) (cloudHeight * 0.7));
         g2.fillOval(x + cloudWidth / 3, y + cloudHeight / 3, (int) (cloudWidth * 0.8), (int) (cloudHeight * 0.8));
