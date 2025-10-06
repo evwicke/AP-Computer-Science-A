@@ -1,4 +1,4 @@
-package src.MullerLyer;
+package GUI.src.MullerLyer;
 
 /*
  * Creates a panel with a muller-lyer effect to be displayed on the screen with helper class MullerLyer.MyPanelViewer.
@@ -34,7 +34,7 @@ public class MullerLyer extends JPanel //isA relationship
 
 
 
-        gT.drawLine((int) (x * .65), (int) (y * 0.50), (int) (x * .95), (int) (y * 0.50)); //makes initial right line, identical to left line
+        gT.drawLine((int) (x * .65), (int) (y * 0.50), (int) (x * .95), (int) (y * 0.50)); //makes initial right line, identical to left line , but at a different x value
 
         gT.drawLine((int) (x * .75), (int) (y * 0.40), (int) (x * .65), (int) (y * 0.50)); //makes the 4 "arms" for the muller-lyer effect.
         gT.drawLine((int) (x * .75), (int) (y * 0.60), (int) (x * .65), (int) (y * 0.50));
