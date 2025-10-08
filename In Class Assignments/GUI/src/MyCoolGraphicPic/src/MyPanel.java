@@ -1,4 +1,4 @@
-package GUI.src.MyCoolGraphicPic.src;
+package src.MyCoolGraphicPic.src;
 
 /*
  * Makes a drawing of a landscape

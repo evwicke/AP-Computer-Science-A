@@ -1,10 +1,16 @@
 #BlueJ class context
-comment0.params=myColor
-comment0.target=MyPanel(java.awt.Color)
-comment1.params=g
-comment1.target=void\ paintComponent(java.awt.Graphics)
+comment0.params=g
+comment0.target=void\ paintComponent(java.awt.Graphics)
+comment1.params=array
+comment1.target=int[]\ desmosToPixX(double[])
 comment2.params=array
-comment2.target=int[]\ desmosToPixX(double[])
-comment3.params=array
-comment3.target=int[]\ desmosToPixY(double[])
-numComments=4
+comment2.target=int[]\ desmosToPixY(double[])
+comment3.params=g2
+comment3.target=void\ drawGradientSky(java.awt.Graphics2D)
+comment4.params=g2\ desmosX\ scale
+comment4.target=void\ drawTreeOnCurve(java.awt.Graphics2D,\ double,\ double)
+comment5.params=g2\ x\ baseY\ scale
+comment5.target=void\ drawPineTree(java.awt.Graphics2D,\ int,\ int,\ double)
+comment6.params=g2\ x\ y\ scale
+comment6.target=void\ drawCloud(java.awt.Graphics2D,\ int,\ int,\ double)
+numComments=7
