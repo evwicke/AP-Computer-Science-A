@@ -98,6 +98,11 @@ public class MyPanel extends JPanel{
         drawCloud(g2, uW-200, 150, 1.3);
         drawCloud(g2, uW-400, 400, 0.75);
 
+        
+        
+        drawFireflies(g2);
+        
+        
         /*
         Basically is a custom color object (technically a paint object, but they function the same).
         the color array is the colors it will go between, the first is in the center, and the last is in the outer parts of the effect.
@@ -105,6 +110,10 @@ public class MyPanel extends JPanel{
         should be at 100% opacity. ( at the middle its color 1, and at the outer its color n.length. )
         then i set the paint to the new paint color.
          */
+        
+        
+        
+        
         Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 50, 45, 16), new Color(0, 0, 0, 105), new Color(0, 0, 0, 255)}; // Make outer color transparent
         float[] fractions = {0.0f, 0.45f, 0.75f, 1.0f}; // Color distribution
         RadialGradientPaint sunBeam = new RadialGradientPaint(
@@ -119,6 +128,8 @@ public class MyPanel extends JPanel{
         int beamSize = (int)(1.5 * Math.max(uW, uH)); //radius of the sun's beams effect
         g2.fillOval(sunX + sunSize/2 - beamSize/2, sunY + sunSize/2 - beamSize/2, beamSize, beamSize);
 
+        
+        
     }
 
     public int[] desmosToPixX(double[] array){
@@ -177,9 +188,57 @@ public class MyPanel extends JPanel{
             }
 
             g2.fillOval(starX, starY, starSize, starSize);
+            
+            
+            Color[] starBeamColors = {new Color(255, 255, 255, 125), new Color(255, 255, 255, 85), new Color(255, 255, 255, 35), new Color(255, 255, 255, 5)}; // Make outer color transparent
+            float[] fractions = {(float)(starSize/(2.5*starSize)), 0.45f, 0.75f, 1.0f}; // Color distribution
+            RadialGradientPaint starBeam = new RadialGradientPaint(
+                    (float)(starX + starSize/2),  // Center X
+                    (float)(starY + starSize/2),  // Center Y
+                    (float)(0.8 * starSize),  // Radius as float
+                    fractions,
+                    starBeamColors
+                );
+            g2.setPaint(starBeam); // this works similarly to graphic.setColor(Color color);
+    
+            int beamSize = (3 * starSize); //radius of the sun's beams effect
+            g2.fillOval(starX + starSize/2 - beamSize/2, starY + starSize/2 - beamSize/2, beamSize, beamSize);
         }
     }
 
+    private void drawFireflies(Graphics2D g2){
+        Random rand = new Random(67); // seed of 67 to make the fireflys in the same place every time i compile it
+        g2.setColor(new Color(255, 200, 105, 110)); // Semi-transparent white (alpha value at 110/255 opacity)
+
+        for (int i = 0; i < 150 /* 20 fireflies */; i++) {
+            int fireflyX = rand.nextInt(uW);
+            int fireflyY = (uH/2) + rand.nextInt(uH/2); 
+            int fireflySize = rand.nextInt(4) +1;
+
+            // Make some fireflys slightly brighter
+            if (rand.nextInt(10) == 0) {
+                g2.setColor(new Color(255, 200, 105, 210));
+            }
+
+            g2.fillOval(fireflyX, fireflyY, fireflySize, fireflySize);
+            
+            
+            Color[] fireflyBeamColors = {new Color(255, 255, 255, 125), new Color(255, 255, 255, 85), new Color(255, 255, 255, 35), new Color(255, 255, 255, 5)}; // Make outer color transparent
+            float[] fractions = {(float)(fireflySize/(2.5*fireflySize)), 0.45f, 0.75f, 1.0f}; // Color distribution
+            RadialGradientPaint fireflyBeam = new RadialGradientPaint(
+                    (float)(fireflyX + fireflySize/2),  // Center X
+                    (float)(fireflyY + fireflySize/2),  // Center Y
+                    (float)(0.8 * fireflySize),  // Radius as float
+                    fractions,
+                    fireflyBeamColors
+                );
+            g2.setPaint(fireflyBeam); // this works similarly to graphic.setColor(Color color);
+    
+            int beamSize = (3 * fireflySize); //radius of the sun's beams effect
+            g2.fillOval(fireflyX + fireflySize/2 - beamSize/2, fireflyY + fireflySize/2 - beamSize/2, beamSize, beamSize);
+        }
+        
+    }
     // Helper to place a tree on the parabolic curve: y = (1/160)(x-30)^2 + 4
     private void drawTreeOnCurve(Graphics2D g2, double desmosX, double scale) {
         // Calculate Y using the parabola formula
