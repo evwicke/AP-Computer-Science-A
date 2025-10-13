@@ -166,21 +166,15 @@ public class MyPanel extends JPanel{
         g2.fillRect(0, 0, uW, uH/2);
 
         //stars
-        Random rand = new Random(67); // seed of 67 to make the stars in the same place every time i compile it
         g2.setColor(new Color(255, 255, 255, 110)); // Semi-transparent white (alpha value at 110/255 opacity)
 
         for (int i = 0; i < 110 /* 110 stars */; i++) {
-            int starX = rand.nextInt(uW);
-            int starY = rand.nextInt(uH / 3); // Only in top third of sky
-            int starSize = rand.nextInt(4) +1;
-
-            // Make some stars slightly brighter
-            if (rand.nextInt(10) == 0) {
-                g2.setColor(new Color(255, 255, 255, 230));
-            }
-
-            g2.fillOval(starX, starY, starSize, starSize);
+            int starX = (int)(Math.random()*uW);
+            int starY = (int)(Math.random()*(uH / 3)); // Only in top third of sky
+            int starSize = (int)(Math.random()*4) +2;
+ 
             
+            g2.fillOval(starX, starY, starSize, starSize);
             
             Color[] starBeamColors = {new Color(255, 255, 255, 125), new Color(255, 255, 255, 85), new Color(255, 255, 255, 35), new Color(255, 255, 255, 5)}; // Make outer color transparent
             float[] fractions = {(float)(starSize/(2.5*starSize)), 0.45f, 0.75f, 1.0f}; // Color distribution
