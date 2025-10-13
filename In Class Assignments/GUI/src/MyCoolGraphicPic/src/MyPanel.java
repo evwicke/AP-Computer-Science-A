@@ -21,7 +21,7 @@ public class MyPanel extends JPanel{
         // antialiasing. yes. smoother edges are always good
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        uH = getHeight(); // have to reset every frame, so I put it in here too.
+        uH = getHeight(); // have to reset every frame ( in case someone moves the size ), so I put it in here too.
         uW = getWidth();
 
         drawGradientSky(g2); // furthest back in the painting is the sky. draw that using the helper method ( I moved it all to a diff method because the stars are messy. )
@@ -38,7 +38,7 @@ public class MyPanel extends JPanel{
         g2.fillRect((0),(uH/2),(uW),(uH/2));
 
         Graphics2D gThin = (Graphics2D) g; // this is for the very thin outline of all the shapes to help them blend in more and be less jagged
-        gThin.setStroke(new BasicStroke(2.5f));
+        gThin.setStroke(new BasicStroke(0.5f));
 
         // top mountains
         double[] topMountainsX = {20.35, 14.75 ,3.6, 0, 0 ,5.35, 9.3, 13.5, 20.7, 25.2,
@@ -53,17 +53,17 @@ public class MyPanel extends JPanel{
          */
         g2.setColor(new Color(98,78,141));
         g2.fillPolygon(topMountains);
-        gThin.setStroke(new BasicStroke(0.5f));
         gThin.setColor(new Color(0, 0, 0, 50)); // Semi-transparent
         gThin.drawPolygon(topMountains);
 
         //bottom mountains
-        double[] bottomMountainsX = {54.2,49.8,44.1,32.7,25.3,21,12.5,9.4,5.54,0,0,8.6,26.6,38.7,50.2,60,60,60};
-        double[] bottomMountainsY = {21.9,25.4,18.94,13.66,8.8,9.94,17,19.66,24.4,22.75,12.5,8.5,3.96,4.2,6.8,9.8,19.2,25.5};
+        double[] bottomMountainsX = {54.2,49.8,44.1,32.7,25.3,21,12.5,9.4,5.54,0,0,
+                    8.6,26.6,38.7,50.2,60,60,60};
+        double[] bottomMountainsY = {21.9,25.4,18.94,13.66,8.8,9.94,17,19.66,24.4,
+                    22.75,12.5,8.5,3.96,4.2,6.8,9.8,19.2,25.5};
         Polygon bottomMountains = new Polygon(desmosToPixX(bottomMountainsX),desmosToPixY(bottomMountainsY), bottomMountainsX.length);
         g2.setColor(new Color(50, 40, 80));
         g2.fillPolygon(bottomMountains);
-        gThin.setStroke(new BasicStroke(0.5f));
         gThin.setColor(new Color(0, 0, 0, 50)); // Semi-transparent
         gThin.drawPolygon(bottomMountains);
 
@@ -100,18 +100,14 @@ public class MyPanel extends JPanel{
 
         
         /*
-        Basically is a custom color object (technically a paint object, but they function the same).
+        Basically is a custom gradient color object (technically a paint object, but they function the same).
         the color array is the colors it will go between, the first is in the center, and the last is in the outer parts of the effect.
         (the effect is a circle because its radial gradient not a normal gradient). the float array is there to tell it WHERE in the circle each color
         should be at 100% opacity. ( at the middle its color 1, and at the outer its color n.length. )
         then i set the paint to the new paint color.
          */
-        
-        
-        
-        
         Color[] sunBeamColors = {new Color(255, 154, 154, 115), new Color(255, 50, 45, 16), new Color(0, 0, 0, 105), new Color(0, 0, 0, 255)}; // Make outer color transparent
-        float[] fractions = {0.0f, 0.45f, 0.75f, 1.0f}; // Color distribution
+        float[] fractions = {0.2f, 0.45f, 0.75f, 1.0f}; // Color distribution
         RadialGradientPaint sunBeam = new RadialGradientPaint(
                 (float)(sunX + sunSize/2),  // Center X
                 (float)(sunY + sunSize/2),  // Center Y
@@ -128,7 +124,7 @@ public class MyPanel extends JPanel{
         
     }
 
-    public int[] desmosToPixX(double[] array){
+    public int[] desmosToPixX(double[] array){ //turns the desmos coordinates into integer pixel amounts of the screen based on width/height of the screen
         double desmosX = 60;
         ArrayList<Integer> pixList = new ArrayList<>(); // arraylists are dynamic array objects. They can take in a bunch of values [0,23,134,12,13,-23] and can be changed both
         // in size and in value. It will automatically resize when an element is added to the end of the array.
@@ -141,18 +137,18 @@ public class MyPanel extends JPanel{
             int pixel = (int)(percentage * getWidth());
             pixList.add(pixel);
         }
-        return pixList.stream().mapToInt(i->i).toArray(); //converts a List<Integer> into a primitive int[] array
+        return pixList.stream().mapToInt(i->i).toArray(); //converts a ArrayList<Integer> into a primitive int[] array
     }
 
-    public int[] desmosToPixY(double[] array){
+    public int[] desmosToPixY(double[] array){ //turns the desmos coordinates into integer pixel amounts of the screen based on width/height of the screen
         double desmosY = 34;
         ArrayList<Integer> pixList = new ArrayList<>();
 
         for(double f : array){
-            /* For each number in the array, this for loop will first : find the percentage of the whole screen,
+            /* For each number in the array, this for loop will first find the percentage of the whole screen,
              * then it will get the pixel equivalent of the percentage OF THE NEW HEIGHT/WIDTH of the screen.
              */
-            double percentage = (Math.abs(34-f) / desmosY);
+            double percentage = (Math.abs(34-f)/*flip over y axis*/ / desmosY);
             int pixel = (int)(percentage * getHeight());
             pixList.add(pixel);
         }
@@ -173,7 +169,7 @@ public class MyPanel extends JPanel{
         Random rand = new Random(67); // seed of 67 to make the stars in the same place every time i compile it
         g2.setColor(new Color(255, 255, 255, 110)); // Semi-transparent white (alpha value at 110/255 opacity)
 
-        for (int i = 0; i < 150 /* 150 stars */; i++) {
+        for (int i = 0; i < 110 /* 110 stars */; i++) {
             int starX = rand.nextInt(uW);
             int starY = rand.nextInt(uH / 3); // Only in top third of sky
             int starSize = rand.nextInt(4) +1;
@@ -202,7 +198,7 @@ public class MyPanel extends JPanel{
         }
     }
 
-    // Helper to place a tree on the parabolic curve: y = (1/160)(x-30)^2 + 4
+    // Helper to place a tree on the curve: y = (1/160)(x-30)^2 + 4
     private void drawTreeOnCurve(Graphics2D g2, double desmosX, double scale) {
         // Calculate Y using the parabola formula
         double desmosY = (1.0/160.0) * Math.pow(desmosX - 33, 2) + 4;
@@ -236,11 +232,11 @@ public class MyPanel extends JPanel{
             // Create a triangle for this layer
             int[] xPoints = {
                     x - layerWidth/2,           // left point
-                    x,                           // top point
+                    x,                            // top point
                     x + layerWidth/2            // right point
                 };
             int[] yPoints = {
-                    layerY,                      // left point
+                    layerY,                        // left point
                     layerY - layerHeight,        // top point
                     layerY                       // right point
                 };
