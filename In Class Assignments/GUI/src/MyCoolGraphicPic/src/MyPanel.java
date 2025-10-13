@@ -99,10 +99,6 @@ public class MyPanel extends JPanel{
         drawCloud(g2, uW-400, 400, 0.75);
 
         
-        
-        drawFireflies(g2);
-        
-        
         /*
         Basically is a custom color object (technically a paint object, but they function the same).
         the color array is the colors it will go between, the first is in the center, and the last is in the outer parts of the effect.
@@ -206,37 +202,6 @@ public class MyPanel extends JPanel{
         }
     }
 
-    private void drawFireflies(Graphics2D g2) {
-        Random rand = new Random(67); // seed of 67 to make the fireflies in the same place every time I compile it
-
-        for (int ySection = 0; ySection < uH / 50; ySection++) { // Iterate through sections of 50 pixels height
-            int firefliesInSection = (int) (5 + 15 * ((double) ySection / (uH / 25))); // Scale the number of fireflies based on section.  Starts at 5, increases to 20.
-            for (int i = 0; i < firefliesInSection; i++) {
-                int fireflyX = rand.nextInt(uW);
-                int fireflyY = ySection * 75 + rand.nextInt(50); // Y position within the current section
-                int fireflySize = rand.nextInt(2) + 1;
-
-                g2.setColor(new Color(255, 200, 105, 110));
-
-
-                g2.fillOval(fireflyX, fireflyY, fireflySize, fireflySize);
-
-                Color[] fireflyBeamColors = {new Color(255, 255, 255, 125), new Color(255, 255, 255, 85), new Color(255, 255, 255, 35), new Color(255, 255, 255, 5)}; // Make outer color transparent
-                float[] fractions = {(float) (fireflySize / (2.5 * fireflySize)), 0.45f, 0.75f, 1.0f}; // Color distribution
-                RadialGradientPaint fireflyBeam = new RadialGradientPaint(
-                        (float) (fireflyX + fireflySize / 2),  // Center X
-                        (float) (fireflyY + fireflySize / 2),  // Center Y
-                        (float) (0.8 * fireflySize),  // Radius as float
-                        fractions,
-                        fireflyBeamColors
-                );
-                g2.setPaint(fireflyBeam); // this works similarly to graphic.setColor(Color color);
-
-                int beamSize = (3 * fireflySize); //radius of the sun's beams effect
-                g2.fillOval(fireflyX + fireflySize / 2 - beamSize / 2, fireflyY + fireflySize / 2 - beamSize / 2, beamSize, beamSize);
-            }
-        }
-    }
     // Helper to place a tree on the parabolic curve: y = (1/160)(x-30)^2 + 4
     private void drawTreeOnCurve(Graphics2D g2, double desmosX, double scale) {
         // Calculate Y using the parabola formula
