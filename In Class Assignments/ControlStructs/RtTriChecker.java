@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class RtTriChecker here.
+ * To check if a set of 3 triangle sides closes to make a real triangle, a right triangle, or a non-real triangle.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @evanwicke
+ * @10/21/2025
  */
 
 import java.util.*;
