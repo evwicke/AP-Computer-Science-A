@@ -1,3 +1,7 @@
+package src;
+
+ 
+
 
 /**
  * To check if a set of 3 triangle sides closes to make a real triangle, a right triangle, or a non-real triangle.
