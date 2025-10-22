@@ -2,10 +2,18 @@ package src;
 
 
 /**
- * Write a description of class Numbahz here.
+ * The purpose of this one is to have you demonstrate your understanding of multiple conditional situations.  Prompt the user to enter a test score(integer) between 0 and 100.
+
+    If the score is not between 0 and 100(inclusive), display “error”, continue to ask until between 0-100 (this requires an error check loop at the beginning of your program)
+    Display what letter grade the score corresponds to.
+    Display whether the score is even or odd.
+    Display whether the score is prime or not :) see notes from class demo
+    Display whether or not the score is divisible by 7.
+    If the score is 97, display “Yay”
+
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @evanwicke
+ * @10/22/2025
  */
 import java.util.*;
 public class Numbahz
@@ -24,6 +32,7 @@ public class Numbahz
         System.out.print("\n  Even / Odd: " + ((grade % 2 == 0)?"Even":"Odd"));
         System.out.print("\n  Prime: " + isPrime(grade));
         System.out.print("\n  Divisible By 7: " + ((grade % 7 == 0)?"true":"false"));
+        System.out.print("\n  Is 97: " + ((grade == 97)?"Yay":"Boo"));
         
     }
     public static double round(double value, int places) { // rounding function outpuyttng a double.
