@@ -4,12 +4,12 @@ package src;
 /**
  * The purpose of this one is to have you demonstrate your understanding of multiple conditional situations.  Prompt the user to enter a test score(integer) between 0 and 100.
 
-    If the score is not between 0 and 100(inclusive), display “error”, continue to ask until between 0-100 (this requires an error check loop at the beginning of your program)
+    If the score is not between 0 and 100(inclusive), display ï¿½errorï¿½, continue to ask until between 0-100 (this requires an error check loop at the beginning of your program)
     Display what letter grade the score corresponds to.
     Display whether the score is even or odd.
     Display whether the score is prime or not :) see notes from class demo
     Display whether or not the score is divisible by 7.
-    If the score is 97, display “Yay”
+    If the score is 97, display ï¿½Yayï¿½
 
  * 
  * @evanwicke
@@ -21,9 +21,9 @@ public class Numbahz
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
         
-        System.out.print("What was your grade? \n  : "); int grade; int counter = 0;
+        System.out.print("What was your grade? \n  : "); int grade; int counter = 0; // the counter sees if the person has put in a value yet or not
         do{
-            if(counter != 0){System.out.print("\nThat wasn't a grade silly. Try again. \n  : ");}
+            if(counter != 0){System.out.print("\nThat wasn't a grade silly. Try again. \n  : ");} // if its not the first time they put in a number, it reminds them to put in a real number
             grade = (int)(round(scan.nextInt(),1));
             counter++;
         }while(grade > 100 || grade < 0);
@@ -31,7 +31,7 @@ public class Numbahz
         System.out.printf("\n  Grade: %s", letterGrade(grade));
         System.out.print("\n  Even / Odd: " + ((grade % 2 == 0)?"Even":"Odd"));
         System.out.print("\n  Prime: " + isPrime(grade));
-        System.out.print("\n  Divisible By 7: " + ((grade % 7 == 0)?"true":"false"));
+        System.out.print("\n  Divisible By 7: " + ((grade % 7 == 0)?"true":"false")); // reminder that i need to put ternarys inside of ( ).
         System.out.print("\n  Is 97: " + ((grade == 97)?"Yay":"Boo"));
         
     }
