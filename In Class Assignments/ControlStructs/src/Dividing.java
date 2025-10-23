@@ -1,9 +1,13 @@
+package src;
+
+ 
+
 
 /**
- * Write a description of class Dividing here.
+ * To do integer division with remainder
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @evanwicke
+ * @10/21/2025
  */
 import java.util.*;
 public class Dividing
