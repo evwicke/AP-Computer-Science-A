@@ -1,4 +1,4 @@
-package src.MullerLyer;
+package GUI.src.MullerLyer;
 
 /*
  * Creates a panel with a muller-lyer effect to be displayed on the screen with helper class MullerLyer.MyPanelViewer.
