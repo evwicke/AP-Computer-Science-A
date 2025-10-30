@@ -23,9 +23,9 @@ public class BookStore {
                                         // I dont want the -1 going through the rest of the loop, like being added to the total values.
                 totalPrice += price / (1 + MARKUP_RATE);
                 markupPrice += price;
-            } catch (Exception e) {
+            } catch (Exception e) { // if the person doesnt put in a number, say invalid input.
                 System.out.println("Invalid input.");
-                scanner.next();
+                scanner.next(); // EAT THE ENTER KEY
             }
         }
 
