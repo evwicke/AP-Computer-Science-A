@@ -30,7 +30,7 @@ public class Checkers {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // constants for frame generation and whether to update frame each draw cycle
-        System.out.println("Multiples of 10 work better for autopaint, but anything works.\n");
+        System.out.println("Multiples of 10 work better for autopaint ( updates board every time a panel is added... try big numbers like 200x200 ), but anything works.\n");
         System.out.println("Enter the number of rows: ");
         final int rows = scan.nextInt();
         System.out.println("Enter the number of columns: ");
@@ -66,6 +66,7 @@ public class Checkers {
                 frame.add(newPanel((i + j) % 2 == 0 ? new Color(0,0,0,0) : Color.RED)); // add a new panel to the frame with correct colors
                 panelCounter++;
                 System.out.print((panelCounter%50==0)? (panelCounter%200==0)? panelCounter + "\n" : panelCounter + "\t" : "");
+                //every 200 panels print the panel count and a new line, every 50 within that print the count and a tab for whitespace
             }
 
             if (rows == cols && (i + 1) % 4 == 0 && autoRepaint) { frame.revalidate(); frame.repaint(); } // if we are autorepainting, every 4th perfect square will be displayed.
