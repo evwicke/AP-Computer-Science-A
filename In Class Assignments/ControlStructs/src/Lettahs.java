@@ -15,13 +15,14 @@ package src;
         Display the characters from index #2 to the end of the name
         Display the person’s initials only.
 
- * @author (your name) 
- * @version (a version number or a date)
+ * @evanwicke
+ * @11/10/2025
  */
 
 import java.util.*;
 import java.util.function.*;
 import src.InputSentinel;
+
 public class Lettahs{
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
@@ -38,15 +39,13 @@ public class Lettahs{
             }
             
             String name = InputSentinel.sentinel(Function.identity() , isInRange , "Please input your full name: ");
-            String[] nameArray = name.trim().split(" ");
-            ArrayList<String> nameArrayList = new ArrayList<String>();
+            String[] nameArray = name.trim().split(" "); // remove the leading and trailing spaces and split based on spaces.
+            ArrayList<String> nameArrayList = new ArrayList<String>(); // turn the primitive array into an ArrayList
             for(String w : nameArray){
                 nameArrayList.add(w);
             }
-            System.out.println(nameArrayList);
             
-            int numChars = name.length() - (nameArrayList.size() - 1);
-            System.out.println(numChars);
+            int numChars = name.length() - (nameArrayList.size() - 1); // number of chracters is the total character count minus the amount of spaces all plus 1
             
             char firstLetter, thirdLetter, lastLetter;
             firstLetter = name.charAt(0);
@@ -65,24 +64,15 @@ public class Lettahs{
                 initials.add(s.charAt(0));
             }
             
-            /*
-             * 
-             *  If the user forgot to enter a space, make them try again.
-        Display the number of characters in the name (not including the space).
-        Display the 1st letter, the 3rd letter, and the last letter (of the full name).
-        Display the name in all caps.
-        If the letters A and Z are both in the name, display “both.”
-        Display the characters from index #4 to (and including) index #6
-        Display the characters from index #2 to the end of the name
-        Display the person’s initials only.
-             * 
-             * 
-             */
+            String initialTot = "";
+            for(char c : initials){
+                initialTot += String.valueOf(c) + " ";
+            }
+            
             System.out.printf("  Characters in name: %d\n" + "  First, third, last letters: %c %c %c\n" + "  ALL CAPS: %s\n" + 
-                    "  Contains A and Z: %b\n" + "  Substring 1: %s\n" + "  Substring 2: %s\n" + "  Initials: %c %c %c\n", numChars, firstLetter, 
-                    thirdLetter, lastLetter, nameCaps, bothAandZ, substringOne, substringTwo, initials.get(0), initials.get(1), initials.get(2));
-            
-            
+                    "  Contains A and Z: %b\n" + "  Substring 1: %s\n" + "  Substring 2: %s\n" + "  Initials: %s\n", numChars, firstLetter, 
+                    thirdLetter, lastLetter, nameCaps, bothAandZ, substringOne, substringTwo, initialTot
+            );
             
             //logic for rerunning
             System.out.print("\n Rerun? (y/n)");
@@ -90,11 +80,5 @@ public class Lettahs{
             runnerFlip = String.valueOf(runner); // turns the char into a string
             runCounter++;
         }while(runnerFlip.equalsIgnoreCase("y"));
-    }
-    
-    public static boolean has(ArrayList<String> array){
-        
-        
-        return true;
     }
 }
