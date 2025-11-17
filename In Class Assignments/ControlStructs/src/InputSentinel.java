@@ -11,16 +11,6 @@ import java.util.*;
 import java.util.function.*;
 public class InputSentinel{
     public static <T> T sentinel(Function<String, T> converter, Predicate<T> condition, String prompt){
-        /**
-         * Predicate<Integer> isInRange = d-> d>=0 && d<=100;
-         * Integer myNumber = inputSentinel(Integer::parseInt, isInRange , "Please input a number between 0 and 100 inclusive");
-         * 
-         */
-
-        /**Integer parseInt    inputSentinel(Integer::parseInt, .. .)
-        Double  parseDouble inputSentinel(Double::parseDouble, ...)
-        Long    parseLong   inputSentinel(Long::parseLong, ...)
-        Float   parseFloat  inputSentinel(Float::parseFloat, ...)*/
         Scanner scanner = new Scanner(System.in);
         T input;
         int counter = 0;
