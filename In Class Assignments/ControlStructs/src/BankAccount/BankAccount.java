@@ -38,9 +38,7 @@ public class BankAccount{ //header
         return (int)(value * Math.pow(10, places) + 0.5)/Math.pow(10,places);
     }
     //toString overriding
-    public String toString(){ 
+    public String toString(){
         return name + "'s Account Balance: $"+ round(balance,2);
     }
-    
-    
 }
