@@ -17,7 +17,7 @@ Print the remaining balance in this form as demonstrated below. Note: a while lo
  */
 import java.util.*;
 public class Tester{
-    public static void Main(){
+    public static void main(String[] args){
         
         Scanner scan = new Scanner(System.in);
         System.out.print("Input your name\n : ");
