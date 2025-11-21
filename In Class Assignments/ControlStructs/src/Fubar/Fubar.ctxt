@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=age
+comment0.target=Fubar(int)
+comment1.params=
+comment1.target=boolean\ ageDiv()
+comment2.params=n
+comment2.target=double\ abs(double)
+comment3.params=w
+comment3.target=char\ nextToLast(java.lang.String)
+comment4.params=
+comment4.target=java.lang.String\ getName()
+comment5.params=n\ w
+comment5.target=void\ displayStuff(int,\ java.lang.String)
+comment6.params=w\ c
+comment6.target=int\ findIndex(java.lang.String,\ char)
+comment7.params=n
+comment7.target=boolean\ isItPrime(int)
+comment8.params=lowerBound\ upperBound
+comment8.target=int\ getPrimez(int,\ int)
+numComments=9
