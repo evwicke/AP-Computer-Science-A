@@ -96,7 +96,7 @@ public class Fubar{
 
         for (int i = 0; i < 10; i++) {
             String guess = scan.next();
-            if (guess.length() > 0 && guess.charAt(0) == target) {
+            if (guess.charAt(0) == target) {
                 System.out.println("You guessed it!");
                 return;
             }
