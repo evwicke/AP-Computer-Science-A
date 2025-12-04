@@ -1,4 +1,4 @@
-package src.BankAccount;
+package ControlStructs.src.BankAccount;
 
 
 /**
@@ -24,7 +24,7 @@ public class Tester{
         String name = scan.nextLine();
         System.out.print("Input your initial deposit amount\n : ");
         double initialDeposit = scan.nextDouble();
-        BankAccount acc01 = new BankAccount(initialDeposit, name);
+        src.BankAccount.BankAccount acc01 = new src.BankAccount.BankAccount(initialDeposit, name);
         
         char input = ' '; // set the input to initlaly be a space so the loop runs. (instead of doing do while.)
         while(input != 'q'){
