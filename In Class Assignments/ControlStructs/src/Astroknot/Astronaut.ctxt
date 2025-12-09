@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=name\ weight\ fitnessLevel\ currentPlanet
+comment0.target=Astronaut(java.lang.String,\ int,\ int,\ Planet)
+comment1.params=
+comment1.target=double\ getJumpHeight()
+comment2.params=
+comment2.target=java.lang.String\ toString()
+numComments=3

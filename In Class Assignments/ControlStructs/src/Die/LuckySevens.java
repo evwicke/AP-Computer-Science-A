@@ -8,6 +8,9 @@ package src.Die;
  * @version (a version number or a date)
  */
 
+
+
+ // the function goes into an infinite loop at winamt = 5 and higher.
 import java.util.*;
 public class LuckySevens{
     public static void main(String[] args){
@@ -28,6 +31,7 @@ public class LuckySevens{
         while(balance >= LOSE_AMT){
             if(balance > maxAmt){maxAmt = balance; maxAmtRuns = runs;}
             
+            
             die1.roll();
             int r1 = die1.getCurrentSide();
             die2.roll();
@@ -39,9 +43,8 @@ public class LuckySevens{
                 System.out.println(balance);
                 
             }else{
-                System.out.println("LOSE");
+                //System.out.println("LOSE");
                 balance -= LOSE_AMT;
-                System.out.println(balance);
             }
             runs++;
         }
