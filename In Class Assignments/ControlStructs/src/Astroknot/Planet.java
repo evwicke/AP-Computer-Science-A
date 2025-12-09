@@ -17,7 +17,7 @@ public class Planet{
         this.name = name;
         this.diameter = diameter;
         this.mass = mass;
-        gravity = (4 * 6.67 * Math.pow(10, -17) * mass)/(Math.pow(diameter,2));
+        gravity = round((4 * 6.67 * Math.pow(10, -17) * mass)/(Math.pow(diameter,2)), 3);
     }
     
     public double getGravity(){
@@ -30,5 +30,9 @@ public class Planet{
     
     public String toString(){
         return "  " + name + "\n  Mass: " + mass + " kilograms\n  Gravity: " + gravity;
+    }
+    
+    private double round(double value, int places){ // rounds double to a certain place value
+        return (int)(value * Math.pow(10, places) + 0.5)/Math.pow(10,places);
     }
 }

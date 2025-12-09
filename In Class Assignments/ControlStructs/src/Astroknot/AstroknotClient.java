@@ -15,8 +15,19 @@ public class AstroknotClient{
         Astronaut Bob = new Astronaut("Bob", 65, 10, Earth);
         System.out.println(Bob);
         System.out.println("  -------- Travel Planets --------  ");
-        
-        
-        
+        Bob.travel(Jupiter);
+        System.out.println(Bob);
+        System.out.println("  -------- Eat --------  ");
+        Bob.eat();
+        System.out.println(Bob);
+        System.out.println("  -------- Exercise --------  ");
+        Bob.exercise(6);
+        System.out.println(Bob);
+        System.out.println("  -------- Rest --------  ");
+        Bob.rest();
+        System.out.println(Bob);
+        System.out.println("  -------- Gravity Event --------  ");
+        Jupiter.gravityField();
+        System.out.println(Bob);
     }
 }
