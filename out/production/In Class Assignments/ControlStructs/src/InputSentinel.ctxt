@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.params=converter\ condition\ prompt
+comment0.target=java.lang.Object\ sentinel(java.util.function.Function,\ java.util.function.Predicate,\ java.lang.String)
+numComments=1
