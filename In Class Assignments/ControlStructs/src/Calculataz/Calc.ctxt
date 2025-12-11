@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=a\ b
+comment0.target=int\ add(int,\ int)
+comment1.params=a\ b
+comment1.target=int\ subtract(int,\ int)
+comment2.params=a\ b
+comment2.target=int\ multiply(int,\ int)
+comment3.params=a\ b
+comment3.target=double\ divide(int,\ int)
+comment4.params=a\ b
+comment4.target=int\ modulus(int,\ int)
+comment5.params=a
+comment5.target=int\ factorial(int)
+numComments=6
