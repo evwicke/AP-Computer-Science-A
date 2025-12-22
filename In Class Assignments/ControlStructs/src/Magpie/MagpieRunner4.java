@@ -1,17 +1,17 @@
 package src.Magpie;
 
 /**
- * MagpieRunner3.java
+ * MagpieRunner4.java
  * A program to carry on conversations with a human user.
- * Create a Magpie3, give it user input, and print its replies.
+ * Create a Magpie4, give it user input, and print its replies.
  */
 
 import java.util.Scanner;
-public class MagpieRunner3
+public class MagpieRunner4
 {
     public static void main(String[] args)
     {
-        Magpie3 maggie = new Magpie3();
+        Magpie4 maggie = new Magpie4();
         String greeting = maggie.getGreeting();
         System.out.println(greeting);
         Scanner in = new Scanner (System.in);

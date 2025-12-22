@@ -57,12 +57,18 @@ public class Magpie2
      */
     public String getResponse(String statement)
     {
-        String response = "";  
-        
-        
-        
-        
-        response = getRandomResponse();       
+        String response = "";
+
+
+        if (statement.indexOf("math") >= 0 || statement.indexOf("science") >= 0) {
+            response = "Is that your favorite class?";
+        } else if (statement.indexOf("CR South") >= 0) {
+            response = "CR South is the best school!";
+        } else if (statement.indexOf("pizza") >= 0) {
+            response = "Pizza is my favorite food too!";
+        } else {
+            response = getRandomResponse();
+        }
         return response;
     }
 }
