@@ -7,4 +7,6 @@ comment2.params=str
 comment2.target=int\ countStrings(java.lang.String)
 comment3.params=
 comment3.target=java.lang.String\ convertItalics()
-numComments=4
+comment4.params=str
+comment4.target=int\ countSimple(java.lang.String)
+numComments=5
