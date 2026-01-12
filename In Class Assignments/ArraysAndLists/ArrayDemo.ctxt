@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ main()
+comment1.params=arr
+comment1.target=int[]\ freqArr(int[])
+comment2.params=size\ lower\ upper
+comment2.target=int[]\ makeRandomIntArray(int,\ int,\ int)
+comment3.params=arr
+comment3.target=void\ printArr(int[])
+comment4.params=arr
+comment4.target=int\ getMax(int[])
+comment5.params=arr
+comment5.target=int\ getMin(int[])
+numComments=6
