@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=size\ lower\ upper
+comment0.target=int[]\ makeRandomIntArray(int,\ int,\ int)
+comment1.params=arr
+comment1.target=void\ printArr(int[])
+comment2.params=amtOfNums\ condition
+comment2.target=int[]\ setArray(int,\ java.util.function.Predicate)
+comment3.params=arr
+comment3.target=int\ getMode(int[])
+comment4.params=arr
+comment4.target=int\ getMax(int[])
+comment5.params=arr
+comment5.target=int\ getMin(int[])
+numComments=6
