@@ -14,7 +14,7 @@ public class ArrUtil{
         for(int i = 0; i<arr.length; i++){
             if(i!= arr.length-1){
                 System.out.print(arr[i] + ",");
-                if(i % 20 == 0 && i != 0)System.out.println();
+                if(((i+1)%15 == 0))System.out.print("\n ");
             }else{
                 System.out.print(arr[i]);
             }
@@ -78,5 +78,15 @@ public class ArrUtil{
             }
         }
         return min;
+    }
+    
+    public static int[] freqArr(int[] arr){
+        int maxValue = getMax(arr);
+        int minValue = getMin(arr);
+        int[] freqArr = new int[maxValue - minValue + 1];
+        for (int j : arr) {
+            freqArr[j - minValue]++;
+        }
+        return freqArr;
     }
 }

@@ -11,4 +11,6 @@ comment4.params=arr
 comment4.target=int\ getMax(int[])
 comment5.params=arr
 comment5.target=int\ getMin(int[])
-numComments=6
+comment6.params=arr
+comment6.target=int[]\ freqArr(int[])
+numComments=7
