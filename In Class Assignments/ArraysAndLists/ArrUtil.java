@@ -17,16 +17,53 @@ public class ArrUtil{
         return freqArr;
     }
     //▪
+    //for dice rolls.
+    public static void simpleGraphicalFreq(int[] arr){
+        for (int i = 0; i < arr.length; i++) {
+            String label = i+2 + ":";
+            System.out.printf("\n%-4s ", label); //%-7s
+            printChars('▪', arr[i]);
+        }
+    }
+    // for dice rolls.
+    public static void autoSimpleGraphicalFreq(int[] arr, int maxBarWidth){
+        int maxFreq = 0;
+        for (int count : arr) {
+            if (count > maxFreq) maxFreq = count;
+        }
+        // Determine scale factor
+        int scale = 1; // Default: 1 symbol = 1 value
+        if (maxFreq > maxBarWidth) {
+            // Ceiling division: ensures maxFreq/scale <= maxBarWidth
+            scale = (int) Math.ceil((double) maxFreq / maxBarWidth);
+        }
+        // Print the Key
+        System.out.println("\n(Key: ▪ =" + scale + ")");
+        // Print the graph using the dynamic scale
+        for (int i = 0; i < arr.length; i++) {
+            String label = (i + 2) + ":";
+            System.out.printf("\n%-4s ", label);
+
+            int symbolsToPrint = arr[i] / scale; // Ignore leftovers
+            printChars('▪', symbolsToPrint);
+        }
+    }
+    
+    //for groups  ( NON DYNAMIC )
     public static void graphicalFreq(int[] arr){
         int[] groupedArr = new int[10];
-        double indexer = 0.1;
+        double indexer = 0;
         for(int i = 0; i<arr.length; i++){
             groupedArr[(int)indexer]+=arr[i];
             indexer += 0.1;
         }
-        
-        for(int i = 0; i<groupedArr.length; i++){
-            System.out.print("\n0-10: "); printChars('▪', groupedArr[i]);
+
+        for (int i = 0; i < groupedArr.length; i++) {
+            int lower = (i * 10) + 1;
+            int upper = lower + 9;
+            String label = lower + "-" + upper + ":";
+            System.out.printf("\n%-7s ", label); //%-7s
+            printChars('▪', groupedArr[i]);
         }
     }
 
@@ -35,7 +72,7 @@ public class ArrUtil{
             System.out.print(value);
         }
     }
-    
+
     public static void printArr(int[] arr){
         System.out.print("\n{");
         for(int i = 0; i<arr.length; i++){
