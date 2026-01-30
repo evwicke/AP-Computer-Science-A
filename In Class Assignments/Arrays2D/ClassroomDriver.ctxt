@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ Main()
+comment1.params=
+comment1.target=void\ clearScreen()
+comment2.params=rows\ cols\ myClass\ scan
+comment2.target=void\ askSeat(int,\ int,\ Classroom,\ java.util.Scanner)
+numComments=3
