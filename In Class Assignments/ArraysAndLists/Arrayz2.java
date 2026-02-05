@@ -10,7 +10,7 @@ public class Arrayz2{
         int[] randArr = ArrUtil.makeRandomIntArray(20, 0, 50);
         ArrUtil.printArr(randArr); 
         
-        int[] freqArr = ArrUtil.freqArr(randArr);
+        int[] freqArr = ArrUtil.freqArr(randArr,1, 10);
         ArrUtil.printArr(freqArr);
         
     }
