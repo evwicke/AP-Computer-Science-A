@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=
+comment0.target=BSBoard()
+comment1.params=
+comment1.target=void\ resetBoard()
+comment2.params=
+comment2.target=void\ printBoard()
+comment3.params=r\ c
+comment3.target=boolean\ isValidPosition(int,\ int)
+comment3.text=\r\n\ Checks\ if\ a\ coordinate\ is\ valid\r\n
+comment4.params=r\ c
+comment4.target=boolean\ isCellEmpty(int,\ int)
+comment4.text=\r\n\ Checks\ if\ a\ cell\ is\ already\ occupied\ by\ a\ ship\r\n
+comment5.params=r\ c\ value
+comment5.target=void\ updateCell(int,\ int,\ java.lang.String)
+comment5.text=\r\n\ Updates\ a\ cell\r\n
+comment6.params=r\ c
+comment6.target=java.lang.String\ getCell(int,\ int)
+comment6.text=\r\n\ Returns\ what\ is\ at\ a\ specific\ cell\r\n
+comment7.params=
+comment7.target=boolean\ allShipsSunk()
+numComments=8

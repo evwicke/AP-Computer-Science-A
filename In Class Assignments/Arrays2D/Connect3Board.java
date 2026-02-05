@@ -1,4 +1,4 @@
-package Arrays2D;
+ 
 import java.util.Scanner;
 public class Connect3Board{
     private int rows;

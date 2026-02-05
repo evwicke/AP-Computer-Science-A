@@ -1,4 +1,4 @@
-package Arrays2D.Battleship;
+package Battleship;
 
 import java.util.Scanner;
 

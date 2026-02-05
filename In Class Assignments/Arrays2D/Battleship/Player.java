@@ -1,4 +1,4 @@
-package Arrays2D.Battleship;
+package Battleship;
 
 import java.util.Scanner;
 
@@ -42,10 +42,21 @@ public class Player {
     public void placeShips(Scanner scan) {
         System.out.println(name + ", place your ships.");
         shipBoard.printBoard();
-
-        // placeSingleShip(scan, BATTLESHIP, "Battleship");
-        // placeSingleShip(scan, CRUISER, "Cruiser");
-        // placeSingleShip(scan, DESTROYER, "Destroyer");
+        placeSingleShip(scan, BATTLESHIP, "Battleship");
+        
+        clearScreen();
+        System.out.println(name + ", place your ships.");
+        shipBoard.printBoard();
+        placeSingleShip(scan, DESTROYER, "Destroyer");
+        
+        clearScreen();
+        System.out.println(name + ", place your ships.");
+        shipBoard.printBoard();
+        placeSingleShip(scan, CRUISER, "Cruiser");
+        clearScreen();
+        
+        System.out.println(name + ", This is the location of your ships.");
+        shipBoard.printBoard();
     }
 
     private void placeSingleShip(Scanner scan, int size, String shipName) {
@@ -54,9 +65,9 @@ public class Player {
         while (!placed) {
             System.out.println("Placing " + shipName + " (Length " + size + ")");
             System.out.print("Enter coordinates (e.g. A4): ");
-            String coord = scan.next();
+            String coord = scan.nextLine();
             System.out.print("Enter direction (u, d, l, r): ");
-            char dir = scan.next().charAt(0);
+            char dir = scan.nextLine().charAt(0);
 
             int startRow;
             int startCol;
@@ -119,18 +130,32 @@ public class Player {
     public void takeTurn(Player enemy, Scanner scan) {
         System.out.println(name + "'s Turn to fire!");
         boolean validShot = false;
-
+        int startRow;
+        int startCol;
+        
         while(!validShot) {
-            System.out.print("Enter coordinates to fire: ");
-            String coord = scan.next();
+            System.out.print("Enter coordinates (e.g. A4): ");
+            String coord = scan.nextLine();
 
-            // TODO: Parse coord
-            // TODO: Check if you already fired there
-
-            // If valid:
-            // Check enemy.shipBoard.getCell(r, c)
-            // If hit: Update enemy.shipBoard to "X", update my torpedoBoard to "X"
-            // If miss: Update my torpedoBoard to "O"
+            try{
+                startRow = rowCharToInt(coord.charAt(0));
+                startCol = Integer.parseInt(coord.substring(1)) - 1;
+                
+            } catch (Exception e) {
+                System.out.println("Invalid coordinate format. Try again (A4).");
+                continue;
+            }
+            String myTorp = torpedoBoard.getCell(startRow, startCol);
+            String enem = enemy.shipBoard.getCell(startRow, startCol);
+            if(myTorp.equals("X") || myTorp.equals("O")){
+                System.out.println("You've already shot here. Try again.");
+                continue;
+            }else if(enem.equals("B") || enem.equals("C") || enem.equals("D")){
+                enemy.shipBoard.updateCell(startRow, startCol,"X");
+                torpedoBoard.updateCell(startRow, startCol,"X");
+            }else{
+                torpedoBoard.updateCell(startRow, startCol,"O");
+            }
 
             validShot = true;
         }
@@ -138,6 +163,9 @@ public class Player {
 
     public boolean hasLost() {
         return shipBoard.allShipsSunk();
+    }
+    public static void clearScreen() {
+        System.out.print('\u000c'); // This works in BlueJ/standard terminals
     }
 }
 
