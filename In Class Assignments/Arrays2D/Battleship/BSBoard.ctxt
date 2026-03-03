@@ -3,8 +3,10 @@ comment0.params=
 comment0.target=BSBoard()
 comment1.params=
 comment1.target=void\ resetBoard()
+comment1.text=\r\n\ Just\ sets\ all\ values\ in\ the\ board\ to\ "-"\r\n
 comment2.params=
 comment2.target=void\ printBoard()
+comment2.text=\r\n\ Loops\ thru\ the\ board\ and\ prints\ it.\ the\ first\ for\ loop\ is\ the\ top\ row\ \#\ thing\ and\r\n\ the\ second\ for\ loop\ is\ the\ letters\ down\ the\ side\ (using\ chars)\ and\ the\ actual\ value\ within\r\n
 comment3.params=r\ c
 comment3.target=boolean\ isValidPosition(int,\ int)
 comment3.text=\r\n\ Checks\ if\ a\ coordinate\ is\ valid\r\n
@@ -19,4 +21,5 @@ comment6.target=java.lang.String\ getCell(int,\ int)
 comment6.text=\r\n\ Returns\ what\ is\ at\ a\ specific\ cell\r\n
 comment7.params=
 comment7.target=boolean\ allShipsSunk()
+comment7.text=\r\n\ Returns\ a\ bool\ based\ on\ if\ all\ of\ the\ values\ in\ the\ ship\ board\ is\ NOT\ B\ D\ or\ C\r\n\ \ or..\ \=\=\ (\!B\ and\ \!D\ and\ \!C)\ \=\=\ \!(B\ or\ D\ or\ C)\r\n
 numComments=8

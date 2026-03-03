@@ -12,6 +12,9 @@ public class BSBoard {
         resetBoard(); // Fill with dashes
     }
 
+    /**
+     * Just sets all values in the board to "-"
+     */
     private void resetBoard() {
         for(int i=0; i<layout.length; i++){
             for(int j=0; j<layout[i].length; j++){
@@ -20,11 +23,22 @@ public class BSBoard {
         }
     }
 
+    /**
+     * Loops thru the board and prints it. the first for loop is the top row # thing and
+     * the second for loop is the letters down the side (using chars) and the actual value within
+     */
     public void printBoard() {
         System.out.print("    ");
+        // top row numbers
         for(int k = 1; k<cols+1; k++){System.out.printf("%-3s ", k);} System.out.println();
         for(int i=0; i<layout.length; i++){
-            System.out.printf(" %-2s ", (char)(i+65));
+            /*The side letter numbers*/
+            System.out.printf(" %-2s ", (char)(i+65)); 
+            //printf(" %-2s") basically makes it so the variable takes up a MINIMUM of 2 spaces
+            //for example, printf("%-4s", (num from 0-1000)) returns any of these 3 outputs ( without the pipe characters ):
+            /* |1   |, etc
+             * |1000|, etc
+             * |230 |, etc      */
             for(int j=0; j<layout[i].length; j++){
                 System.out.printf("%-3s ", layout[i][j]);
             }
@@ -68,6 +82,10 @@ public class BSBoard {
         return layout[r][c];
     }
 
+    /**
+     * Returns a bool based on if all of the values in the ship board is NOT B D or C
+     *  or.. == (!B and !D and !C) == !(B or D or C)
+     */
     public boolean allShipsSunk() {
         for(int i=0; i<layout.length; i++){
             for(int j=0; j<layout[i].length; j++){

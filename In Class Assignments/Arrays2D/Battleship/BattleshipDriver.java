@@ -8,15 +8,17 @@ public class BattleshipDriver {
         System.out.println("Battleship!");
 
         // Setup playrs
-        // TODO: Let them name themselves
-        Player p1 = new Player("Player 1");
-        Player p2 = new Player("Player 2");
+        System.out.print(" > Player 1, what is your name? \n  : ");
+        Player p1 = new Player(scan.nextLine());
+        System.out.print(" > Player 2, what is your name? \n  : ");
+        Player p2 = new Player(scan.nextLine());
 
         //Place ships
         p1.placeShips(scan);
         buffer("Press Enter twice to end turn...");
         bufferClear(p2.getName() + ", press Enter twice to start placing ships...");
         clearScreen();
+        
         p2.placeShips(scan);
         buffer("Press Enter twice to end turn...");
         clearScreen();
@@ -37,6 +39,8 @@ public class BattleshipDriver {
             
             //check win
             if (enemyPlayer.hasLost()) {
+                clearScreen();
+                currentPlayer.printBoards();
                 System.out.println("Game Over. " + currentPlayer.getName() + " wins");
                 gameOver = true;
             } else {
@@ -63,7 +67,7 @@ public class BattleshipDriver {
     }
     public static void buffer(String str){
         System.out.println(str);
-        try{scan.nextLine();scan.nextLine();scan.nextLine();}catch(Exception e){}
+        try{scan.nextLine();scan.nextLine();}catch(Exception e){}
     }
     public static void clearScreen() {
         System.out.print('\u000c'); // This works in BlueJ/standard terminals
