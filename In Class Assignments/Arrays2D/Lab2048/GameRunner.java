@@ -1,5 +1,4 @@
 package Lab2048;
-
 /**
  * GameRunner.java  
  *
@@ -9,7 +8,7 @@ package Lab2048;
  */ 
 
 import java.util.Scanner;
- 
+import java.io.*;              // for activity 5B
 public class GameRunner
 {
    public static void main(String[] args)
@@ -63,5 +62,15 @@ public class GameRunner
          myGame.add2ToBoard();
       }
       myGame.displayBoard();   
+     
+      // for activity 5B 
+      try
+      {
+          myGame.checkHighScore();
+      }
+      catch (IOException ioe)
+      {
+          ioe.printStackTrace();
+      }               
    }
 }

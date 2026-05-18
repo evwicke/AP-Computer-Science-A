@@ -1,20 +1,21 @@
 package Lab2048;
-import java.io.*;                   
-import java.util.Scanner;          
-import java.util.ArrayList; 
 /**
  * Game2048.java  
  *
  * @author – Your name
  * @author – Class period
  *
- */  
+ */ 
+
+import java.io.*;                   
+import java.util.Scanner;          
+import java.util.ArrayList;         
+
 public class Game2048
 {
     private int[][] gameBoard;
     private int score;
     private int boardSize;   
-    private final int WIN_CONDITION = 2048;
 
     public Game2048()
     {
@@ -27,135 +28,133 @@ public class Game2048
 
     public void add2ToBoard()
     {
-        boolean looking = true;
-        while(looking){
-            int x_val = (int)(Math.random() * boardSize);
-            int y_val = (int)(Math.random() * boardSize);
-
-            if(gameBoard[x_val][y_val] == 0){
-                gameBoard[x_val][y_val] = 2;
-                looking = false;
-            }else{
-                continue;
-            }
+        int randRow = (int)(Math.random()*boardSize);
+        int randCol = (int)(Math.random()*boardSize);
+        while (gameBoard[randRow][randCol] != 0)
+        {
+            randRow = (int)(Math.random()*boardSize);
+            randCol = (int)(Math.random()*boardSize);
         }
-    }      
-
-    public void moveLeft()
-    {
-        for(int r = 0; r < boardSize; r++){
-            for(int c = 1; c < boardSize; c++){
-                if (gameBoard[r][c] != 0){
-                    int current = c;
-                    while (current > 0 && gameBoard[r][current - 1] == 0){
-                        gameBoard[r][current - 1] = gameBoard[r][current];
-                        gameBoard[r][current] = 0;
-                        current--;
-                    }
-                }
-            }
-        }
-    }
+        gameBoard[randRow][randCol] = 2;
+    }                  
 
     public void moveRight()
     {
-        /*
-         *  - - - -
-         *  - 2 - -
-         *  - - 4 -
-         *  - 2 - -
-         *  
-         *  Starts on the top row and the second to last column. checks if its not a zero. If it is, it will go left
-         *  to the next value to the left. If it isnt a zero, it goes through this logic:
-         *  while the current column is less than the last index and the value to the right is a zero:
-         *  move the value over and overwrite the 0. then cover up your tracks and set the original value to 0.
-         *  then move over the column 1 and do it again.
-         */
-
-        for(int r = 0; r < boardSize; r++){
-            for(int c = boardSize-2; c >= 0; c--){
-                if (gameBoard[r][c] != 0){
-                    int current = c;
-                    while (current < boardSize-1 && gameBoard[r][current + 1] == 0){
-                        gameBoard[r][current + 1] = gameBoard[r][current];
-                        gameBoard[r][current] = 0;
-                        current++;
+        for (int row = 0; row < gameBoard.length; row++)
+        {
+            for (int col = gameBoard[0].length - 1; col > 0; col--)
+            {
+                if (gameBoard[row][col] == 0)
+                {
+                    int counter = col - 1;
+                    while (counter >= 0 && gameBoard[row][counter] == 0)
+                    {
+                        counter--;
+                    }
+                    if (counter >= 0)
+                    {
+                        gameBoard[row][col] = gameBoard[row][counter];
+                        gameBoard[row][counter] = 0;
                     }
                 }
             }
         }
     }
 
-    public void moveUp()
+    public void moveLeft()
     {
-        for(int c = 0; c < boardSize; c++){
-            for(int r = 1; r < boardSize; r++){
-                if(gameBoard[r][c] != 0){
-                    int current = r;
-                    while(current > 0 && gameBoard[current - 1][c] == 0){
-                        gameBoard[current - 1][c] = gameBoard[current][c];
-                        gameBoard[current][c] = 0;
-                        current--;
+        for (int row = 0; row < gameBoard.length; row++)
+        {
+            for (int col = 0; col < gameBoard[0].length - 1; col++)
+            {
+                if (gameBoard[row][col] == 0)
+                {
+                    int counter = col + 1;
+                    while (counter<gameBoard[0].length)
+                    {
+                        if (gameBoard[row][col] == 0)
+                        {
+                            int counter = row - 1;
+                            while (counter >= 0 && gameBoard[counter][col] == 0)
+                            {
+                                counter--;
+                            }
+                            if (counter >= 0)
+                            {
+                                gameBoard[row][col] = gameBoard[counter][col];
+                                gameBoard[counter][col] = 0;
+                            }
+                        }
+                        row--;
                     }
                 }
             }
         }
     }
 
-    public void moveDown(){
-        for(int c = 0; c < boardSize; c++){ 
-            for(int r = 0; r < boardSize; r++){
-                if(gameBoard[r][c] != 0){
-                    int current = r;
-                    while(current < boardSize-1 && gameBoard[current + 1][c] == 0){
-                        gameBoard[current + 1][c] = gameBoard[current][c];
-                        gameBoard[current][c] = 0;
-                        current++;
-                    }
+    public void mergeLeft()
+    {
+        for (int row = 0; row < gameBoard.length; row++)
+        {
+            for (int col = 0; col < gameBoard[0].length - 1; col++)
+            {
+                if (gameBoard[row][col] == gameBoard[row][col+1] && 
+                gameBoard[row][col+1] != 0)
+                {
+                    gameBoard[row][col] *= 2;
+                    gameBoard[row][col+1] = 0;
+                    score += gameBoard[row][col];
                 }
             }
         }
     }
 
-    public void mergeLeft(){
-        for(int r = 0; r < boardSize; r++){
-            for(int c = 0; c < boardSize-1; c++){
-                if (gameBoard[r][c] != 0 && gameBoard[r][c+1] == gameBoard[r][c]){
-                    gameBoard[r][c] *= 2;
-                    gameBoard[r][c+1] = 0;
+    public void mergeRight()
+    {
+        for (int row = 0; row < gameBoard.length; row++)
+        {
+            for (int col = gameBoard[0].length - 2; col >= 0; col--)
+            {
+                if (gameBoard[row][col] == gameBoard[row][col+1] && 
+                gameBoard[row][col+1] != 0)
+                {
+                    gameBoard[row][col+1] *= 2;
+                    gameBoard[row][col] = 0;
+                    score += gameBoard[row][col+1];
                 }
             }
         }
     }
 
-    public void mergeRight(){
-        for(int r = 0; r < boardSize; r++){
-            for(int c = boardSize - 1; c > 0; c--){
-                if (gameBoard[r][c] != 0 && gameBoard[r][c-1] == gameBoard[r][c]){
-                    gameBoard[r][c] *= 2;
-                    gameBoard[r][c-1] = 0;
+    public void mergeUp()
+    {
+        for (int col = 0; col < gameBoard[0].length; col++)
+        {
+            for (int row = 0; row < gameBoard.length - 1; row++)
+            {
+                if (gameBoard[row][col] == gameBoard[row+1][col] && 
+                gameBoard[row+1][col] != 0)
+                {
+                    gameBoard[row][col] *= 2;
+                    gameBoard[row+1][col] = 0;
+                    score += gameBoard[row][col];
                 }
             }
         }
     }
 
-    public void mergeUp(){
-        for(int c = 0; c < boardSize; c++){
-            for(int r = 0; r < boardSize-1; r++){
-                if (gameBoard[r][c] != 0 && gameBoard[r+1][c] == gameBoard[r][c]){
-                    gameBoard[r][c] *= 2;
-                    gameBoard[r+1][c] = 0;
-                }
-            }
-        }
-    }
-
-    public void mergeDown(){
-        for (int c = 0; c < boardSize; c++) {
-            for (int r = boardSize - 1; r > 0; r--) {
-                if (gameBoard[r][c] != 0 && gameBoard[r][c] == gameBoard[r-1][c]) {
-                    gameBoard[r][c] *= 2;
-                    gameBoard[r-1][c] = 0;
+    public void mergeDown()
+    {
+        for (int col = 0; col < gameBoard[0].length; col++)
+        {
+            for (int row = gameBoard.length - 2; row >= 0; row--)
+            {
+                if (gameBoard[row][col] == gameBoard[row+1][col] &&
+                gameBoard[row+1][col] != 0)
+                {
+                    gameBoard[row+1][col] *= 2;
+                    gameBoard[row][col] = 0;
+                    score += gameBoard[row+1][col];
                 }
             }
         }
@@ -163,31 +162,24 @@ public class Game2048
 
     public boolean gameOver()
     {
-        //Check for Win
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                if (gameBoard[r][c] == WIN_CONDITION) {
-                    return true;
-                }
-                if (gameBoard[r][c] == 0) {
-                    return false; 
-                }
-            }
-        }
-        //Check for Possible Merges
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                if (c < boardSize - 1 && gameBoard[r][c] == gameBoard[r][c+1]) {
-                    return false;
-                }
-                if (r < boardSize - 1 && gameBoard[r][c] == gameBoard[r+1][c]) {
-                    return false;
+        boolean found2048 = false;
+        int zeroCount = 0;
+        for (int row = 0; row < gameBoard.length; row++)
+        {
+            for (int col = 0; col < gameBoard[0].length; col++)
+            {
+                if (gameBoard[row][col] == 0)
+                {
+                    zeroCount++;
+                }  
+                if (gameBoard[row][col] == 32)
+                {
+                    found2048 = true;
                 }
             }
         }
-        //No empty spots and no merges possible.
-        return true;
-    } 
+        return (found2048 || zeroCount == 0);
+    }   
 
     public void displayBoard()
     {
@@ -233,5 +225,5 @@ public class Game2048
     public void checkHighScore() throws IOException
     {
         // enter your code for 5B here
-    }     
+    }               
 }
