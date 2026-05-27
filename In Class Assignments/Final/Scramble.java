@@ -1,33 +1,46 @@
-
-/**
- * Write a description of class Scramble here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Scramble
-{
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Scramble
-     */
-    public Scramble()
-    {
-        // initialise instance variables
-        x = 0;
+import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Scramble extends Module {
+    private String secretWord;
+    private WordBank wordBank = new WordBank();
+    
+    public Scramble(Bomb bomb, BombGUI gui) {
+        super(bomb, gui);
+        secretWord = wordBank.getWord("easy");
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void start() {
+        gui.printToConsole("SCRAMBLE DEFUSAL STARTED.");
+        gui.printToConsole("Type 'BACK' to exit.");
+        gui.printToConsole(wordScrambler(secretWord.length(), secretWord), Color.MAGENTA, 18);
+    }
+
+    public void handleInput(String input) {
+        if (input.equals("BACK")) {
+            gui.clearConsole();
+            bomb.exitModule(); 
+        }else if(input.toLowerCase().equals(secretWord.toLowerCase())){
+            gui.clearConsole();
+            bomb.moduleSolved();
+        }else{
+            gui.printToConsole(" Input Incorrect ");
+            bomb.addStrike();
+        }
+    }
+    
+    public static String wordScrambler(int steps, String word){
+        String[] split = word.split("");
+        ArrayList<String> splitList = new ArrayList<String>();
+        for(String c : split){splitList.add(c);}
+
+        for(int i = 0; i < steps; i++){
+            splitList.add((int)(Math.random()*word.length() -1), splitList.remove(i));
+        }
+        
+        String fin = "";
+        for(String c : splitList){fin +=c;};
+        return fin;
     }
 }

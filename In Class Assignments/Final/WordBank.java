@@ -1,33 +1,26 @@
 
-/**
- * Write a description of class WordBank here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class WordBank
-{
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class WordBank
-     */
-    public WordBank()
-    {
-        // initialise instance variables
-        x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+public class WordBank{
+    private String[] wordListTwo = {"Acknowledge", "Architectural", "Background",
+        "Bioinformatics", "Capabilities", "Celebration",
+        "Characteristics", "Collaboration", "Cryptocurrency",
+        "Cybersecurity", "Development", "Discipline", "Documentation",
+        "Environment", "Experimental", "Fluctuation", "Foundations",
+        "Generative", "Hierarchical", "Infrastructure", "Intelligence",
+        "Maintenance", "Microservices", "Optimization", "Performance",
+        "Programming", "Relationships", "Specialized", "Sustainable", "Terminology"};
+        
+    private String[] wordList = { 
+        "Apple", "Chair", "Table", "House", "Mouse", 
+        "Water", "Clock", "Light", "Bread", "Train", 
+        "Smile", "River", "Stone", "Dream", "Heart", 
+        "Space", "Plane", "Plant", "Banana", "Planet", 
+        "Garden", "Screen", "Bottle", "Window", "Shadow", 
+        "Butter", "Bridge", "Friend", "Forest", "Rocket" };
+    
+    public WordBank(){}
+    public String getWord(String s){
+        if(s.equals("easy")){return wordList[(int)(Math.random()*wordList.length)];}
+        if(s.equals("hard")){return wordListTwo[(int)(Math.random()*wordListTwo.length)];}
+        return "";
     }
 }

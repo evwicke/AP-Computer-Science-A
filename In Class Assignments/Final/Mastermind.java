@@ -1,33 +1,20 @@
-
-/**
- * Write a description of class Mastermind here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Mastermind
-{
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Mastermind
-     */
-    public Mastermind()
-    {
-        // initialise instance variables
-        x = 0;
+public class Mastermind extends Module {
+    public Mastermind(Bomb bomb, BombGUI gui) {
+        super(bomb, gui);
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void start() {
+        gui.printToConsole("MASTERMIND MODULE STARTED.");
+        gui.printToConsole("Type 'BACK' to exit.");
+    }
+
+    public void handleInput(String input) {
+        if (input.equals("BACK")) {
+            gui.clearConsole();
+            bomb.exitModule(); 
+        }else if(input.equals("DEVSOLVE")){
+            gui.clearConsole();
+            bomb.moduleSolved();
+        }
     }
 }

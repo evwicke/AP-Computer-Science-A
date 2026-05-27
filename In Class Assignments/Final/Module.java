@@ -1,33 +1,30 @@
+public abstract class Module {
+    
+    // protected means public to its children but private to everyone else
+    protected Bomb bomb;
+    protected BombGUI gui;
+    protected boolean isDefused;
 
-/**
- * Write a description of class Module here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Module
-{
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Module
-     */
-    public Module()
-    {
-        // initialise instance variables
-        x = 0;
+    // data type "Module"
+    public Module(Bomb bomb, BombGUI gui) {
+        this.bomb = bomb;
+        this.gui = gui;
+        this.isDefused = false;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    // A normal method that all children will share exactly as is
+    public boolean getIsDefused() {
+        return isDefused;
     }
+
+    // kinda like an interface. it just lets me call handleInput on a module that isnt typed as 
+    // a specific module:
+
+    // Module testModule = new Module(...);
+    // testModule.handleInput(...);
+    // will not throw any errors, because the module class pushes this method down to its 
+    // children methods and lets them make their own versions of it WITHOUT OVERRIDING IT.
+    // its basically like which one of you does this belong to, then gives the input to it.
+    public abstract void start();
+    public abstract void handleInput(String input);
 }
