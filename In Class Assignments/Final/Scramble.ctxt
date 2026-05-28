@@ -1,10 +1,11 @@
 #BlueJ class context
-comment0.params=bomb\ gui
-comment0.target=Scramble(Bomb,\ BombGUI)
-comment1.params=
-comment1.target=void\ start()
-comment2.params=input
-comment2.target=void\ handleInput(java.lang.String)
-comment3.params=steps\ word
-comment3.target=java.lang.String\ wordScrambler(int,\ java.lang.String)
-numComments=4
+comment0.target=Scramble
+comment1.params=bomb\ gui
+comment1.target=Scramble(Bomb,\ BombGUI)
+comment2.params=
+comment2.target=void\ start()
+comment3.params=input
+comment3.target=void\ handleInput(java.lang.String)
+comment4.params=steps\ word
+comment4.target=java.lang.String\ wordScrambler(int,\ java.lang.String)
+numComments=5

@@ -21,7 +21,7 @@ public class Bomb {
         this.strikes = 0;
 
         gui.printToConsole("Bomb Armed.\n > Use HELP to get commands.");
-        clock = new CountdownClock(180, this, gui); 
+        clock = new CountdownClock(240, this, gui); 
         clock.start();
     }
 
