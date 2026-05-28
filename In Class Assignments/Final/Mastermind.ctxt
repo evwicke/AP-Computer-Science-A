@@ -1,9 +1,8 @@
 #BlueJ class context
-comment0.target=Mastermind
-comment1.params=bomb\ gui
-comment1.target=Mastermind(Bomb,\ BombGUI)
-comment2.params=
-comment2.target=void\ start()
-comment3.params=input
-comment3.target=void\ handleInput(java.lang.String)
-numComments=4
+comment0.params=bomb\ gui
+comment0.target=Mastermind(Bomb,\ BombGUI)
+comment1.params=
+comment1.target=void\ start()
+comment2.params=input
+comment2.target=void\ handleInput(java.lang.String)
+numComments=3

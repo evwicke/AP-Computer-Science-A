@@ -43,6 +43,11 @@ public class CountdownClock {
         endTime -= (secondsToLose * 1000);
     }
 
+    public long getTimeLeft() {
+        long timeLeft = endTime - System.currentTimeMillis();
+        // no negative numbers
+        return Math.max(0, timeLeft); 
+    }
     
     private void updateDisplay() {
 

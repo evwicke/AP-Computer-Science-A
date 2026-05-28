@@ -168,6 +168,23 @@ public class BombGUI {
         consoleOutput.setCaretPosition(consoleOutput.getDocument().getLength());
     }
     
+    //like print instead of println
+    public void printInline(String text, Color c, int size) {
+        StyleContext sc = StyleContext.getDefaultStyleContext();
+        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, FONT_NAME);
+        aset = sc.addAttribute(aset, StyleConstants.FontSize, size);
+        aset = sc.addAttribute(aset, StyleConstants.Bold, true);
+
+        try {
+            int len = consoleOutput.getDocument().getLength();
+            consoleOutput.getDocument().insertString(len, text, aset); // just removed the +"\n
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+        consoleOutput.setCaretPosition(consoleOutput.getDocument().getLength());
+    }
+    
     public void clearConsole() {
         consoleOutput.setText("");
     }
@@ -182,7 +199,7 @@ public class BombGUI {
     }
     public Color getBGColor(){return BG_COLOR;}
     
-    public static void main(String[] args) {
+    public static void main() {
         new BombGUI();
     }
     

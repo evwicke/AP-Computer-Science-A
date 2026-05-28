@@ -4,17 +4,24 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Bomb {
+    //main variables
     private BombGUI gui;
     private int strikes;
 
+    //modules for the visuals
     private boolean scrambleDefused = false;
     private boolean mastermindDefused = false;
     private boolean simonDefused = false;
 
+    //modules and the timer
     private int modulesDefused = 0;
     private Module[] modules;
     private Module activeModule;
     private CountdownClock clock;
+
+    //for high scores
+    private boolean waitingForInitials = false;
+    private long pendingScore = 0;
 
     public Bomb(BombGUI gui) {
         this.gui = gui;
@@ -26,6 +33,26 @@ public class Bomb {
     }
 
     public void receiveCommand(String command) {
+
+        if (waitingForInitials) {
+            // 1 to 3 characters, no spaces
+            if (command.length() == 0 || command.length() > 3 || command.contains(" ")) {
+                gui.printToConsole("ENTER 1 TO 3 LETTERS:", Color.RED, 16);
+                return; //go back to the top
+            }
+
+            HighScoreManager hs = new HighScoreManager();
+            hs.saveScore(command, pendingScore);
+
+            // Turn off waiting mode
+            waitingForInitials = false;
+
+            gui.clearConsole();
+            gui.changeBGColor(Color.GREEN);
+            gui.printToConsole("SAVED", Color.BLACK, 24);
+            gui.printToConsole(command + " - " + hs.formatTime(pendingScore), Color.BLACK, 20);
+            return;
+        }
 
         //if youre in a module, handle the input within the module itself
         if (activeModule != null) {
@@ -45,6 +72,17 @@ public class Bomb {
             gui.printToConsole("SCRAMBLE:   " + (scrambleDefused ? "[DEFUSED]" : "[ARMED]"));
             gui.printToConsole("MASTERMIND: " + (mastermindDefused ? "[DEFUSED]" : "[ARMED]"));
             gui.printToConsole("SIMON:      " + (simonDefused ? "[DEFUSED]" : "[ARMED]"));
+            break;
+
+            case "HIGHSCORE":
+            HighScoreManager hs = new HighScoreManager();
+            long record = hs.getHighScoreTime();
+            String initials = hs.getHighScoreInitials();
+            if (record == 0) {
+                gui.printToConsole("NO HIGH SCORE SET YET.", Color.YELLOW, 16);
+            } else {
+                gui.printToConsole("CURRENT RECORD: " + initials + " - " + hs.formatTime(record), Color.CYAN, 18);
+            }
             break;
 
             case "EXPLODE":
@@ -107,6 +145,7 @@ public class Bomb {
         //instanceof is a built in equality operator for use in inheritance.
         if (activeModule instanceof Scramble) {
             scrambleDefused = true;
+            // Note: You can add \n back here (e.g. "SCRAMBLE\nDEFUSED") if you want it on two lines!
             gui.setScrambleVisual("SCRAMBLE DEFUSED", Color.GREEN);
         } else if (activeModule instanceof Mastermind) {
             mastermindDefused = true;
@@ -121,10 +160,28 @@ public class Bomb {
 
         gui.clearConsole();
         gui.setMainMenuVisualsVisible(true); 
+        
         if (modulesDefused >= 3) {
 
             clock.stop(); 
-            gui.changeBGColor(Color.GREEN);
+            
+            long finalTime = clock.getTimeLeft();
+            HighScoreManager hsManager = new HighScoreManager();
+            
+            // Check if they beat the record
+            if (finalTime > hsManager.getHighScoreTime()) {
+                gui.changeBGColor(Color.GREEN);
+                gui.printToConsole("TIME REMAINING: " + hsManager.formatTime(finalTime), Color.BLACK, 16);
+                gui.printToConsole("\nENTER 3 INITIALS FOR THE LEADERBOARD: ", Color.BLACK, 18);
+                
+                waitingForInitials = true;
+                pendingScore = finalTime;
+            } else {
+                gui.changeBGColor(Color.GREEN);
+                gui.printToConsole("Time Remaining: " + hsManager.formatTime(finalTime), Color.BLACK, 16);
+                gui.printToConsole("Current Record: " + hsManager.getHighScoreInitials() + " - " + hsManager.formatTime(hsManager.getHighScoreTime()), Color.BLACK, 16);
+            }
+            // ----------------------------
 
         } else {
 
@@ -132,6 +189,7 @@ public class Bomb {
             gui.printToConsole("STATUS, MASTERMIND, SCRAMBLE, SIMON");
         }
     }
+
 
     public void stealTime(int seconds) {
         gui.printToConsole(seconds + " SECONDS LOST!", Color.RED, 21);
@@ -154,6 +212,7 @@ public class Bomb {
         gui.clearConsole();
         gui.changeBGColor(Color.RED);
     }
+
     public BombGUI getGUI(){return gui;}
 }
 class VisualModule extends JPanel{
@@ -164,29 +223,29 @@ class VisualModule extends JPanel{
         this.color = color;
         this.setBackground(Color.BLACK);
     }
-    
+
     public void updateState(String text, Color color){
         this.text = text;
         this.color = color;
         this.repaint(); // tells java to redraw the box
     }
-    
+
     @Override //idk why it only works when this is here but it does soooo
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        
+
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(5)); // Line thickness
         g2.setColor(color);
         g2.drawRoundRect(10, 10, getWidth() - 20, getHeight() - 20, 40, 40);
-        
+
         // draw the text in the center, from one of the past assignments
         g2.setFont(new Font("DialogInput", Font.BOLD, 16));
         FontMetrics fm = g2.getFontMetrics();
         int textWidth = fm.stringWidth(text);
         int textHeight = fm.getAscent();
         g2.drawString(text, (getWidth() - textWidth) / 2, (getHeight() + textHeight) / 2);
-        
+
     }
 }

@@ -11,8 +11,8 @@ public class Simon extends Module {
     private ArrayList<String> LevelThreeWords = new ArrayList<String>();
 
     private final int SECONDS_TO_DEFUSE = 20;
-    private final double PUNISH_TIME = 1.5;
-    private final double GRACE_TIME = 3;
+    private final double PUNISH_TIME = 3;
+    private final double GRACE_TIME = 1.8;
     private long endTime; 
     private javax.swing.Timer miniTimer;
 
@@ -73,8 +73,8 @@ public class Simon extends Module {
             }
 
             if (foundWord) {
-                endTime += (1000*PUNISH_TIME);
-                gui.printToConsole("+1.5s", Color.CYAN, 18);
+                endTime += (1000*GRACE_TIME);
+                gui.printToConsole("+" + GRACE_TIME + "s", Color.CYAN, 18);
 
                 if (LevelOneWords.size() == 0) {
                     gui.clearConsole();
@@ -86,7 +86,7 @@ public class Simon extends Module {
                     printNewWords(LevelOneWords); 
                 }
             } else {
-                endTime -= (1000*GRACE_TIME);
+                endTime -= (1000*PUNISH_TIME);
                 gui.printToConsole("WRONG WORD!", Color.RED, 18);
                 bomb.addStrike();
             }
@@ -102,8 +102,8 @@ public class Simon extends Module {
             }
 
             if (foundWord) {
-                endTime += (1000*PUNISH_TIME); 
-                gui.printToConsole("+1.5s", Color.CYAN, 18);
+                endTime += (1000*GRACE_TIME); 
+                gui.printToConsole("+" + GRACE_TIME + "s", Color.CYAN, 18);
 
                 if (LevelTwoWords.size() == 0) {
                     gui.clearConsole();
@@ -115,7 +115,7 @@ public class Simon extends Module {
                     printNewWords(LevelTwoWords); 
                 }
             } else {
-                endTime -= (1000*GRACE_TIME);
+                endTime -= (1000*PUNISH_TIME);
                 gui.printToConsole("WRONG WORD!", Color.RED, 18);
                 bomb.addStrike();
             }
@@ -131,8 +131,8 @@ public class Simon extends Module {
             }
 
             if (foundWord) {
-                endTime += (1000*PUNISH_TIME);
-                gui.printToConsole("+1.5s", Color.CYAN, 18);
+                endTime += (1000*GRACE_TIME);
+                gui.printToConsole("+" + GRACE_TIME + "s", Color.CYAN, 18);
 
                 if (LevelThreeWords.size() == 0) {
                     miniTimer.stop(); 
@@ -144,7 +144,7 @@ public class Simon extends Module {
                     printNewWords(LevelThreeWords); 
                 }
             } else {
-                endTime -= (1000*GRACE_TIME);
+                endTime -= (1000*PUNISH_TIME);
                 gui.printToConsole("WRONG WORD!", Color.PINK, 18);
                 bomb.addStrike();
             }
