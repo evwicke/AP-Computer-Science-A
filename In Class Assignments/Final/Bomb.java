@@ -12,6 +12,7 @@ public class Bomb {
     private boolean scrambleDefused = false;
     private boolean mastermindDefused = false;
     private boolean simonDefused = false;
+    private boolean overrideDefused = false;
 
     //modules and the timer
     private int modulesDefused = 0;
@@ -28,7 +29,7 @@ public class Bomb {
         this.strikes = 0;
 
         gui.printToConsole("Bomb Armed.\n > Use HELP to get commands.");
-        clock = new CountdownClock(240, this, gui); 
+        clock = new CountdownClock(180, this, gui); 
         clock.start();
     }
 
@@ -63,12 +64,12 @@ public class Bomb {
         //main menu commands
         switch (command) {
             case "HELP":
-            gui.printToConsole("STATUS, MASTERMIND, SCRAMBLE, SIMON");
+            gui.printToConsole("STATUS, MASTERMIND, SCRAMBLE, SIMON, HIGHSCORE");
             break;
 
             case "STATUS":
             gui.printToConsole("--- STATUS ---", Color.CYAN);
-            gui.printToConsole("STRIKES: " + strikes + "/3", Color.RED);
+            gui.printToConsole("STRIKES: " + strikes + "/3?", Color.RED);
             gui.printToConsole("SCRAMBLE:   " + (scrambleDefused ? "[DEFUSED]" : "[ARMED]"));
             gui.printToConsole("MASTERMIND: " + (mastermindDefused ? "[DEFUSED]" : "[ARMED]"));
             gui.printToConsole("SIMON:      " + (simonDefused ? "[DEFUSED]" : "[ARMED]"));
@@ -92,7 +93,19 @@ public class Bomb {
             case "DEVTIME":
             clock.forceTimeLeft(3);
             break;
-
+            
+            case "DEVSOLVE":
+                
+            scrambleDefused = true;
+            gui.setScrambleVisual("SCRAMBLE DEFUSED", Color.GREEN);
+            mastermindDefused = true;
+            gui.setMastermindVisual("MASTERMIND DEFUSED", Color.GREEN);
+            simonDefused = true;
+            gui.setSimonVisual("SIMON DEFUSED", Color.GREEN);
+            modulesDefused=2;
+            moduleSolved();            
+            break;
+            
             case "SCRAMBLE":
             if (scrambleDefused) {
                 gui.printToConsole("SCRAMBLE IS ALREADY DEFUSED.", Color.GREEN);
@@ -125,7 +138,17 @@ public class Bomb {
                 activeModule.start();
             }
             break;
-
+            
+            case "OVERRIDE":
+            if(modulesDefused<3){gui.printToConsole("OVERRIDE LOCKED. MODULES STILL ACTIVE.", Color.RED, 16);}
+            else{
+                activeModule = new Override(this,gui);
+                gui.clearConsole();
+                gui.setMainMenuVisualsVisible(false);
+                activeModule.start();
+            }
+            break;
+            
             default:
             gui.printToConsole("COMMAND NOT RECOGNIZED.");
             addStrike();
@@ -145,7 +168,6 @@ public class Bomb {
         //instanceof is a built in equality operator for use in inheritance.
         if (activeModule instanceof Scramble) {
             scrambleDefused = true;
-            // Note: You can add \n back here (e.g. "SCRAMBLE\nDEFUSED") if you want it on two lines!
             gui.setScrambleVisual("SCRAMBLE DEFUSED", Color.GREEN);
         } else if (activeModule instanceof Mastermind) {
             mastermindDefused = true;
@@ -153,15 +175,23 @@ public class Bomb {
         } else if (activeModule instanceof Simon) {
             simonDefused = true;
             gui.setSimonVisual("SIMON DEFUSED", Color.GREEN);
+        }else if (activeModule instanceof Override) {
+            overrideDefused = true;
+            gui.setOverrideVisual("OVERRIDE DEFUSED", Color.GREEN);
         }
-
+        
+        if (scrambleDefused && mastermindDefused && simonDefused && !overrideDefused) {
+            gui.printToConsole("FINAL MODULE FOUND: OVERRIDE", Color.RED, 24);
+            gui.showOverrideVisual();
+        }
+        
         activeModule = null; // back to main menu
         modulesDefused++; 
 
         gui.clearConsole();
         gui.setMainMenuVisualsVisible(true); 
         
-        if (modulesDefused >= 3) {
+        if (modulesDefused == 4) {
 
             clock.stop(); 
             
@@ -181,11 +211,9 @@ public class Bomb {
                 gui.printToConsole("Time Remaining: " + hsManager.formatTime(finalTime), Color.BLACK, 16);
                 gui.printToConsole("Current Record: " + hsManager.getHighScoreInitials() + " - " + hsManager.formatTime(hsManager.getHighScoreTime()), Color.BLACK, 16);
             }
-            // ----------------------------
-
         } else {
 
-            gui.printToConsole("MODULE DEFUSED (" + modulesDefused + "/3 completed)", Color.YELLOW);
+            gui.printToConsole("MODULE DEFUSED (" + modulesDefused + "/3? completed)", Color.YELLOW);
             gui.printToConsole("STATUS, MASTERMIND, SCRAMBLE, SIMON");
         }
     }
@@ -230,7 +258,7 @@ class VisualModule extends JPanel{
         this.repaint(); // tells java to redraw the box
     }
 
-    @Override //idk why it only works when this is here but it does soooo
+    
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -248,4 +276,9 @@ class VisualModule extends JPanel{
         g2.drawString(text, (getWidth() - textWidth) / 2, (getHeight() + textHeight) / 2);
 
     }
+    
+    public Dimension getPreferredSize() {
+        return new Dimension(210, 280);
+    }
+    
 }

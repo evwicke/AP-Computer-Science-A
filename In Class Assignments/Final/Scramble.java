@@ -20,7 +20,11 @@ public class Scramble extends Module {
     public void handleInput(String input) {
         if (input.equals("BACK")) {
             gui.clearConsole();
-            bomb.exitModule(); 
+            bomb.exitModule();
+        }else if(input.equals("DEVSOLVE")){
+            gui.clearConsole();
+            bomb.moduleSolved(); 
+            return;
         }else if(input.toLowerCase().equals(secretWord.toLowerCase())){
             gui.clearConsole();
             bomb.moduleSolved();

@@ -59,6 +59,13 @@ public class Simon extends Module {
             bomb.exitModule(); 
             return; 
         }
+        if(input.equals("DEVSOLVE")){
+            miniTimer.stop();
+            gui.updateModuleTimer(""); // Hide the clock
+            gui.clearConsole();
+            bomb.moduleSolved(); 
+            return;
+        }
 
         boolean foundWord = false;
 

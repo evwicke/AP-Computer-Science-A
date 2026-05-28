@@ -1,8 +1,11 @@
 #BlueJ class context
-comment0.params=
-comment0.target=boolean\ getIsDefused()
-comment1.params=
-comment1.target=void\ start()
-comment2.params=input
-comment2.target=void\ handleInput(java.lang.String)
-numComments=3
+comment0.target=Module
+comment1.params=bomb\ gui
+comment1.target=Module(Bomb,\ BombGUI)
+comment2.params=
+comment2.target=boolean\ getIsDefused()
+comment3.params=
+comment3.target=void\ start()
+comment4.params=input
+comment4.target=void\ handleInput(java.lang.String)
+numComments=5

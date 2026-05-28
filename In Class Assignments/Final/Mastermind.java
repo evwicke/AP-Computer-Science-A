@@ -31,7 +31,11 @@ public class Mastermind extends Module {
             bomb.exitModule();
             return;
         }
-
+        if(input.equals("DEVSOLVE")){
+            gui.clearConsole();
+            bomb.moduleSolved(); 
+            return;
+        }
         // split typing by spaces into a String array
         String[] guess = input.split(" ");
 
