@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=rows\ cols
+comment0.target=Classroom(int,\ int)
+comment1.params=
+comment1.target=Classroom()
+comment2.params=arr2D
+comment2.target=void\ resetSeats(java.lang.String[][])
+comment3.params=row\ col\ init
+comment3.target=void\ setSeat(int,\ int,\ java.lang.String)
+comment4.params=row\ col
+comment4.target=boolean\ seatFilled(int,\ int)
+comment5.params=
+comment5.target=void\ printClass()
+numComments=6
