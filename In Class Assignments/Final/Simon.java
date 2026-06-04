@@ -10,9 +10,9 @@ public class Simon extends Module {
     private ArrayList<String> LevelTwoWords = new ArrayList<String>();
     private ArrayList<String> LevelThreeWords = new ArrayList<String>();
 
-    private final int SECONDS_TO_DEFUSE = 20;
-    private final double PUNISH_TIME = 3;
-    private final double GRACE_TIME = 1.8;
+    private final int SECONDS_TO_DEFUSE = 26;
+    private final double PUNISH_TIME = 2;
+    private final double GRACE_TIME = 4;
     private long endTime; 
     private javax.swing.Timer miniTimer;
 

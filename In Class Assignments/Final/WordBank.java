@@ -9,13 +9,9 @@ public class WordBank{
         "Maintenance", "Microservices", "Optimization", "Performance",
         "Programming", "Relationships", "Specialized", "Sustainable", "Terminology"};
         
-    private String[] wordList = { 
-        "Apple", "Chair", "Table", "House", "Mouse", 
-        "Water", "Clock", "Light", "Bread", "Train", 
-        "Smile", "River", "Stone", "Dream", "Heart", 
-        "Space", "Plane", "Plant", "Banana", "Planet", 
-        "Garden", "Screen", "Bottle", "Window", "Shadow", 
-        "Butter", "Bridge", "Friend", "Forest", "Rocket" };
+    private String[] wordList = { "Planet", "Garden", "Screen", 
+        "Bottle", "Window", "Shadow", "Butter", "Bridge", 
+        "Friend", "Forest", "Rocket" };
     
     public WordBank(){}
     public String getWord(String s){

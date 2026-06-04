@@ -1,4 +1,4 @@
-
+//hi
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +19,8 @@ public class Bomb {
     private Module[] modules;
     private Module activeModule;
     private CountdownClock clock;
-
+    private final double MINUTES_CLOCK = 4;
+    
     //for high scores
     private boolean waitingForInitials = false;
     private long pendingScore = 0;
@@ -29,7 +30,7 @@ public class Bomb {
         this.strikes = 0;
 
         gui.printToConsole("Bomb Armed.\n > Use HELP to get commands.");
-        clock = new CountdownClock(180, this, gui); 
+        clock = new CountdownClock((int)(MINUTES_CLOCK * 60), this, gui); 
         clock.start();
     }
 
@@ -93,9 +94,9 @@ public class Bomb {
             case "DEVTIME":
             clock.forceTimeLeft(3);
             break;
-            
-            case "DEVSOLVE":
-                
+
+            /*case "DEVSOLVE":
+
             scrambleDefused = true;
             gui.setScrambleVisual("SCRAMBLE DEFUSED", Color.GREEN);
             mastermindDefused = true;
@@ -105,7 +106,7 @@ public class Bomb {
             modulesDefused=2;
             moduleSolved();            
             break;
-            
+            */
             case "SCRAMBLE":
             if (scrambleDefused) {
                 gui.printToConsole("SCRAMBLE IS ALREADY DEFUSED.", Color.GREEN);
@@ -138,7 +139,7 @@ public class Bomb {
                 activeModule.start();
             }
             break;
-            
+
             case "OVERRIDE":
             if(modulesDefused<3){gui.printToConsole("OVERRIDE LOCKED. MODULES STILL ACTIVE.", Color.RED, 16);}
             else{
@@ -148,7 +149,7 @@ public class Bomb {
                 activeModule.start();
             }
             break;
-            
+
             default:
             gui.printToConsole("COMMAND NOT RECOGNIZED.");
             addStrike();
@@ -179,31 +180,31 @@ public class Bomb {
             overrideDefused = true;
             gui.setOverrideVisual("OVERRIDE DEFUSED", Color.GREEN);
         }
-        
+
         if (scrambleDefused && mastermindDefused && simonDefused && !overrideDefused) {
             gui.printToConsole("FINAL MODULE FOUND: OVERRIDE", Color.RED, 24);
             gui.showOverrideVisual();
         }
-        
+
         activeModule = null; // back to main menu
         modulesDefused++; 
 
         gui.clearConsole();
         gui.setMainMenuVisualsVisible(true); 
-        
+
         if (modulesDefused == 4) {
 
             clock.stop(); 
-            
+
             long finalTime = clock.getTimeLeft();
             HighScoreManager hsManager = new HighScoreManager();
-            
+
             // Check if they beat the record
             if (finalTime > hsManager.getHighScoreTime()) {
                 gui.changeBGColor(Color.GREEN);
                 gui.printToConsole("TIME REMAINING: " + hsManager.formatTime(finalTime), Color.BLACK, 16);
                 gui.printToConsole("\nENTER 3 INITIALS FOR THE LEADERBOARD: ", Color.BLACK, 18);
-                
+
                 waitingForInitials = true;
                 pendingScore = finalTime;
             } else {
@@ -218,15 +219,14 @@ public class Bomb {
         }
     }
 
-
-    public void stealTime(int seconds) {
+    public void stealTime(int seconds){
         gui.printToConsole(seconds + " SECONDS LOST!", Color.RED, 21);
         clock.subtractTime(seconds);
     }
 
     public void addStrike() {
         strikes++;
-        gui.printToConsole("STRIKE " + strikes + " ADDED!", Color.RED, 21);
+        gui.printToConsole("STRIKE " + strikes + " ADDED", Color.RED, 21);
         gui.printToConsole((3-strikes) + " STRIKES REMAINING.", Color.RED, 21);
         stealTime(30);
 
@@ -258,11 +258,10 @@ class VisualModule extends JPanel{
         this.repaint(); // tells java to redraw the box
     }
 
-    
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
+        //i used this in the checkerboard project, it adds antialiasing which smooths out the lines 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(5)); // Line thickness
         g2.setColor(color);
@@ -276,9 +275,9 @@ class VisualModule extends JPanel{
         g2.drawString(text, (getWidth() - textWidth) / 2, (getHeight() + textHeight) / 2);
 
     }
-    
+
     public Dimension getPreferredSize() {
         return new Dimension(210, 280);
     }
-    
+
 }

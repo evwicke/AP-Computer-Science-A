@@ -1,11 +1,10 @@
 #BlueJ class context
-comment0.target=HighScoreManager
+comment0.params=
+comment0.target=long\ getHighScoreTime()
 comment1.params=
-comment1.target=long\ getHighScoreTime()
-comment2.params=
-comment2.target=java.lang.String\ getHighScoreInitials()
-comment3.params=initials\ timeRemainingMs
-comment3.target=void\ saveScore(java.lang.String,\ long)
-comment4.params=millis
-comment4.target=java.lang.String\ formatTime(long)
-numComments=5
+comment1.target=java.lang.String\ getHighScoreInitials()
+comment2.params=initials\ timeRemainingMs
+comment2.target=void\ saveScore(java.lang.String,\ long)
+comment3.params=millis
+comment3.target=java.lang.String\ formatTime(long)
+numComments=4
